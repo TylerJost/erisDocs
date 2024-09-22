@@ -3,8 +3,7 @@ Mass General Brigham Computing Guide
 
 This is documentation for getting started with computing at Mass General Brigham. It is based on the
 `Texas Advanced Computing Center <https://docs.tacc.utexas.edu/hpc/lonestar6/>`_ 
-computing documentation
-
+computing documentation. 
 
 Welcome to Lumache's documentation!
 ===================================
