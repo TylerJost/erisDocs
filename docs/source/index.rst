@@ -1,17 +1,15 @@
 Mass General Brigham Computing Guide
-======================
+=============================================
 
 This is documentation for getting started with computing at Mass General Brigham. It is based on the
 `Texas Advanced Computing Center <https://docs.tacc.utexas.edu/hpc/lonestar6/>`_ 
-computing documentation. 
+computing documentation. It is part self-written, part collection of documents from the associated `knowledge base <https://rc.partners.org/kb>`_. 
 
-Welcome to Lumache's documentation!
-===================================
+There are several key differences between this documentation and the "official" knowledge base:
 
-**Lumache** (/lu'make/) is a Python library for cooks and food lovers that
-creates recipes mixing random ingredients.  It pulls data from the `Open Food
-Facts database <https://world.openfoodfacts.org/>`_ and offers a *simple* and
-*intuitive* API.
+- These documents focus on ERISXdl, the GPU computing cluster.
+- These documents are (arguably) more up to date. They will only use :code:`SLURM`, etc.
+- These documents are meant to guide users chronologically, starting 
 
 .. note::
 
@@ -25,23 +23,23 @@ Facts database <https://world.openfoodfacts.org/>`_ and offers a *simple* and
    code
    answers
 
-Section 1
----------
+.. Section 1
+.. ---------
 
-.. include:: usage.rst
+.. .. include:: usage.rst
 
-Section 2
----------
+.. Section 2
+.. ---------
 
-.. include:: code.rst
+.. .. include:: code.rst
 
-Section 3
----------
+.. Section 3
+.. ---------
 
-.. include:: answers.md
+.. .. include:: answers.md
 
-.. .. toctree::
-..    usage
-..    code
-..    usage2
-..    answers
+.. .. .. toctree::
+.. ..    usage
+.. ..    code
+.. ..    usage2
+.. ..    answers
