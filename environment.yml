@@ -1,4 +1,4 @@
-name: sphinx2
+name: sphinx
 channels:
   - conda-forge
   - defaults
