@@ -1,0 +1,9 @@
+name: sphinx2
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - pip:
+      - sphinx
+      - myst-parser
+      - sphinx-book-theme
