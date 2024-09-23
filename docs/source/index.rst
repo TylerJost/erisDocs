@@ -9,24 +9,37 @@ There are several key differences between this documentation and the "official" 
 
 - These documents focus on ERISXdl, the GPU computing cluster.
 - These documents are (arguably) more up to date. They will only use :code:`SLURM`, etc.
-- These documents are meant to guide users chronologically, starting 
+- These documents are meant to guide users succesively, starting with information about the available partitions, modules, and development.
+- These documents are meant to be displayed in a coherent manner, meaning that a user can see where they are in each section (notably this is missing from the knowledge base).
+
+
 
 .. note::
 
-   This project is under active development.
+   This project is under active development. Good documentation is rare/non-existent. If you have questions please email me at tjost@bwh.harvard.edu.
+   
+   Additionally, this project is open-source and hosted on GitHub at `www.github.com/tylerjost/erisDocs <https://www.github.com/tylerjost/erisDocs/>`_.  
 
 .. toctree::
-   :maxdepth: 2
-   :caption: Contents:
+   :maxdepth: 7
+   :titlesonly:
+   :hidden:
 
-   usage
-   code
    answers
 
-.. Section 1
-.. ---------
-
+.. usage
+.. --------
 .. .. include:: usage.rst
+
+answers
+---------
+.. include:: answers.md
+   :parser: myst_parser.sphinx_
+
+answers
+---------
+.. include:: answers.md
+   :parser: myst_parser.sphinx_
 
 .. Section 2
 .. ---------
@@ -38,8 +51,3 @@ There are several key differences between this documentation and the "official" 
 
 .. .. include:: answers.md
 
-.. .. .. toctree::
-.. ..    usage
-.. ..    code
-.. ..    usage2
-.. ..    answers

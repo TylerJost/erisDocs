@@ -1,47 +1,53 @@
 Mass General Brigham Computing Guide
-======================
+=============================================
 
 This is documentation for getting started with computing at Mass General Brigham. It is based on the
 `Texas Advanced Computing Center <https://docs.tacc.utexas.edu/hpc/lonestar6/>`_ 
-computing documentation. 
+computing documentation. It is part self-written, part collection of documents from the associated `knowledge base <https://rc.partners.org/kb>`_. 
 
-Welcome to Lumache's documentation!
-===================================
+There are several key differences between this documentation and the "official" knowledge base:
 
-**Lumache** (/lu'make/) is a Python library for cooks and food lovers that
-creates recipes mixing random ingredients.  It pulls data from the `Open Food
-Facts database <https://world.openfoodfacts.org/>`_ and offers a *simple* and
-*intuitive* API.
+- These documents focus on ERISXdl, the GPU computing cluster.
+- These documents are (arguably) more up to date. They will only use :code:`SLURM`, etc.
+- These documents are meant to guide users succesively, starting with information about the available partitions, modules, and development.
+- These documents are meant to be displayed in a coherent manner, meaning that a user can see where they are in each section (notably this is missing from the knowledge base).
+
+
 
 .. note::
 
-   This project is under active development.
+   This project is under active development. Good documentation is rare/non-existent. If you have questions please email me at tjost@bwh.harvard.edu.
+   
+   Additionally, this project is open-source and hosted on GitHub at `www.github.com/tylerjost/erisDocs <https://www.github.com/tylerjost/erisDocs/>`_.  
 
 .. toctree::
-   :maxdepth: 2
-   :caption: Contents:
+   :maxdepth: 7
+   :titlesonly:
+   :hidden:
 
-   usage
-   code
    answers
 
-Section 1
+.. usage
+.. --------
+.. .. include:: usage.rst
+
+answers
 ---------
-
-.. include:: usage.rst
-
-Section 2
----------
-
-.. include:: code.rst
-
-Section 3
----------
-
 .. include:: answers.md
+   :parser: myst_parser.sphinx_
 
-.. .. toctree::
-..    usage
-..    code
-..    usage2
-..    answers
+answers
+---------
+.. include:: answers.md
+   :parser: myst_parser.sphinx_
+
+.. Section 2
+.. ---------
+
+.. .. include:: code.rst
+
+.. Section 3
+.. ---------
+
+.. .. include:: answers.md
+
