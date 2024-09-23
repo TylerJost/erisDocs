@@ -25,21 +25,21 @@ There are several key differences between this documentation and the "official" 
    :titlesonly:
    :hidden:
 
-   answers
+   knowledgeBaseLinks
 
 .. usage
 .. --------
 .. .. include:: usage.rst
 
-answers
+Knowledge Base Links
 ---------
-.. include:: answers.md
+.. include:: knowledgeBaseLinks.md
    :parser: myst_parser.sphinx_
 
-answers
----------
-.. include:: answers.md
-   :parser: myst_parser.sphinx_
+.. answers
+.. ---------
+.. .. include:: answers.md
+..    :parser: myst_parser.sphinx_
 
 .. Section 2
 .. ---------
