@@ -5,6 +5,13 @@ This is documentation for getting started with computing at Mass General Brigham
 `Texas Advanced Computing Center <https://docs.tacc.utexas.edu/hpc/lonestar6/>`_ 
 computing documentation. It is part self-written, part collection of documents from the associated `knowledge base <https://rc.partners.org/kb>`_. 
 
+.. note::
+
+   This guide is written assuming you are familiar with using a UNIX based command line system. It tries to not assume that
+   you understand the way that ERISXdl is structured, the specific software stack it uses, or that you have any background
+   in the niche environment of high-performance computing. 
+
+
 There are several key differences between this documentation and the "official" knowledge base:
 
 - These documents focus on ERISXdl, the GPU computing cluster.
@@ -25,16 +32,25 @@ There are several key differences between this documentation and the "official" 
    :titlesonly:
    :hidden:
 
+
    knowledgeBaseLinks
+   nirmalLabStart
+
 
 .. usage
 .. --------
 .. .. include:: usage.rst
 
+Getting Started
+-----------
+.. include:: nirmalLabStart.md
+   :parser: myst_parser.sphinx_
+
 Knowledge Base Links
 ---------
 .. include:: knowledgeBaseLinks.md
    :parser: myst_parser.sphinx_
+
 
 .. answers
 .. ---------
