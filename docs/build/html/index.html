@@ -303,7 +303,7 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-started">Getting Started</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#preliminary-steps-for-nirmal-lab-members">Preliminary Steps for Nirmal Lab Members</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1"></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#system-architecture">System Architecture</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#knowledge-base-links">Knowledge Base Links</a><ul class="nav section-nav flex-column">
@@ -356,8 +356,20 @@ in the niche environment of high-performance computing.</p>
 <li><p>Verify your access to the group by calling <code class="docutils literal notranslate"><span class="pre">groups</span></code> from the command line.</p></li>
 </ol>
 </section>
-<section id="id1">
-<h3><a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<section id="system-architecture">
+<h3>System Architecture<a class="headerlink" href="#system-architecture" title="Link to this heading">#</a></h3>
+<p><em>Adapted from https://rc.partners.org/kb/computational-resources/erisxdl?article=3650</em></p>
+<p>ERIS Scientific Computing has implemented a new deep learning GPU Cluster, ERISXdl (ERIS Extreme Deep Learning). This system is built with NVIDIA DGX-1, an integrated system that includes high-performance GPU interconnects which deliver industry-leading performance for AI and deep learning. The current system includes 5 nodes each containing 8 X NVIDIA Tesla V100 GPUs with an aggregate of more than 200 thousand CUDA cores, 25600 Tensor cores, 1280 GB of GPU memory, and 35TB of local storage for data processing, to allow the user to more quickly train larger models as part of a wider series of experiments.</p>
+<p>Increased productivity and performance benefits come from the fact that ERISXdl is an integrated and NVIDIA-supported hardware-software system that is tuned for deep learning. This platform is therefore ideal for addressing deeper and more complex neural networks which offer dramatic increases in accuracy but at a cost of longer compute times and increased latency. In general ERISXdl represents a good fit for the requirements of Deep Learning and Neural Network modelling more generally.</p>
+<p>ERISXdl platform provides:</p>
+<ul class="simple">
+<li><p>Efficient, high-bandwidth streaming of training data. Each system comes configured with a single 480 GB boot OS SSD, and four 1.92 TB SAS SSDs (7.6 TB total) configured as a RAID 0 striped volume for high-bandwidth performance.</p></li>
+<li><p>Multi-gpu and multi-system with GPU performance designed for HPC and Deep Learning applications. Multi-system scaling of Deep Learning computational workloads, both inside the system and between systems, to match the significant GPU performance of each system.</p></li>
+<li><p>The system memory capacity is higher than the GPU memory capacity to enable simplified buffer management and balance for deep learning workloads.</p></li>
+<li><p>Kubernetes and Docker containerized environments to easily emulate the entire software workflow and maintain portability and reproducibility.</p></li>
+<li><p>Jupyter notebooks for rapid development, integration with Github and HPC scheduler Slurm to distribute the workload across the system.</p></li>
+<li><p>Access to high-bandwidth, low-latency Briefcase storage (<strong>Authors Note: I’ll explain what this is later</strong>).</p></li>
+</ul>
 </section>
 </section>
 <section id="knowledge-base-links">
@@ -415,7 +427,7 @@ in the niche environment of high-performance computing.</p>
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-started">Getting Started</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#preliminary-steps-for-nirmal-lab-members">Preliminary Steps for Nirmal Lab Members</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1"></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#system-architecture">System Architecture</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#knowledge-base-links">Knowledge Base Links</a><ul class="nav section-nav flex-column">
