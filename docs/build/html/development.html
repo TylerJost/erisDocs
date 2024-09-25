@@ -296,7 +296,11 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Using Containers</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#podman-and-harbor">Podman and Harbor</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#podman-and-harbor">Podman and Harbor</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pulling-an-existing-image">Pulling an Existing Image</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#customizing-an-existing-image">Customizing an Existing Image</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#submitting-jobs">Submitting Jobs</a></li>
@@ -317,9 +321,75 @@ document.write(`
 <p>If you want to run code in a reproducible, easy to share environment, Docker containers and images are excellent vehicles for running this code. Briefly and non-technically, running a Docker container is like running a computationally inexpensive isolated computer inside of your computer. The instructions for making the container come from the image. For more information on Docker containers and images, check out <a class="reference external" href="https://aws.amazon.com/compare/the-difference-between-docker-images-and-containers/">this article from AWS</a>. For a brief primer on making your own Docker images, check out <a class="reference external" href="https://containers-at-tacc.readthedocs.io/en/latest/containerize-your-code/overview.html">this article from TACC</a>.</p>
 <section id="podman-and-harbor">
 <h2>Podman and Harbor<a class="headerlink" href="#podman-and-harbor" title="Link to this heading">#</a></h2>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>A lot of the official documentation is <strong>very</strong> loose with the terms container and image. When you are on ERISXdl, the end point is building an image which will in turn make a container that runs your code. Remember that images are templates for building containers. This might seem pedantic but is important when communicating to other technical people and important for not confusing new users. As a general rule:
+✅ You can push and pull a docker image and use it to make a container.
+❌ You can’t push and pull a docker container, but you can use it to run code.</p>
+</div>
 <p><em>Adapted from <a class="reference external" href="https://rc.partners.org/kb/article/3718">https://rc.partners.org/kb/article/3718</a></em></p>
+<section id="pulling-an-existing-image">
+<h3>Pulling an Existing Image<a class="headerlink" href="#pulling-an-existing-image" title="Link to this heading">#</a></h3>
 <p>Docker can be extremely <a class="reference external" href="https://docs.docker.com/engine/security/">insecure and dangerous to run</a>. So exercise caution when pulling a new Docker image. Because of this, ERISXdl uses a tools called <a class="reference external" href="https://podman.io/">podman</a>. Other groups use apptainer/singularity as well. For our purposes, these are virtually the same as Docker as we are not concerned with root access.</p>
-<p>Harbor is a private container registry used by ERISXdl that you can use to push images. Harbor is used because ERISXdl is not connected to the internet.</p>
+<p>Harbor is a private container registry used by ERISXdl that you can use to push images. Harbor is used because ERISXdl is not connected to the internet but you will still want to access images. Let’s practice by grabbing an image, tagging it, then uploading it to Harbor.</p>
+<ol class="arabic">
+<li><p>Login to the registry you want to use:</p>
+<p>You can use dockerhub directly:</p>
+<p><code class="docutils literal notranslate"><span class="pre">podman</span> <span class="pre">login</span> <span class="pre">docker.io</span></code></p>
+<p>or use Harbor:</p>
+<p><code class="docutils literal notranslate"><span class="pre">podman</span> <span class="pre">login</span> <span class="pre">erisxdl.partners.org</span></code></p>
+</li>
+<li><p>Search for an image (in this case a lightweight Linux distribution, Alpine Linux):</p>
+<p><code class="docutils literal notranslate"><span class="pre">podman</span> <span class="pre">search</span> <span class="pre">docker.io/alpine</span></code></p>
+</li>
+<li><p>Pull the image</p>
+<p><code class="docutils literal notranslate"><span class="pre">podman</span> <span class="pre">pull</span> <span class="pre">docker.io/library/alpine</span></code></p>
+<p>We can view the image with <code class="docutils literal notranslate"><span class="pre">podman</span> <span class="pre">images</span></code> or <code class="docutils literal notranslate"><span class="pre">podman</span> <span class="pre">image</span> <span class="pre">ls</span></code>. It will look something like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">REPOSITORY</span>                 <span class="n">TAG</span>      <span class="n">IMAGE</span> <span class="n">ID</span>       <span class="n">CREATED</span>       <span class="n">SIZE</span>
+<span class="n">docker</span><span class="o">.</span><span class="n">io</span><span class="o">/</span><span class="n">library</span><span class="o">/</span><span class="n">alpine</span>   <span class="n">latest</span>   <span class="mi">91</span><span class="n">ef0af61f39</span>   <span class="mi">2</span> <span class="n">weeks</span> <span class="n">ago</span>   <span class="mf">8.09</span> <span class="n">MB</span>
+</pre></div>
+</div>
+</li>
+<li><p>Tag the image:</p>
+<p><code class="docutils literal notranslate"><span class="pre">podman</span> <span class="pre">tag</span> <span class="pre">d4ff818577bc</span> <span class="pre">erisxdl.partners.org/&lt;PAS</span> <span class="pre">Group</span> <span class="pre">Name</span> <span class="pre">in</span> <span class="pre">lowercase&gt;/alpine:demo-copy</span></code></p>
+</li>
+<li><p>Push the image to Harbor</p>
+<p><code class="docutils literal notranslate"><span class="pre">podman</span> <span class="pre">push</span> <span class="pre">erisxdl.partners.org/&lt;PAS</span> <span class="pre">Group</span> <span class="pre">Name</span> <span class="pre">in</span> <span class="pre">lowercase&gt;/alpine:demo-copy</span></code></p>
+</li>
+</ol>
+<p>If you wanted to, you could use this image for running your code.</p>
+</section>
+<section id="customizing-an-existing-image">
+<h3>Customizing an Existing Image<a class="headerlink" href="#customizing-an-existing-image" title="Link to this heading">#</a></h3>
+<p>If you spin up a container from an image, this gives you root access to the container. This means you could install python, a package manager, etc inside the container. You could then commit these changes to a new image, then upload this to Harbor and use it.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><strong>Author’s Note</strong>
+Customizing an existing image is an extremely convenient feature. However, other than a record of file changes, there is very little reproducibility in this. It is highly recommended (by me) that you create dockerfiles that generate images you can use.</p>
+</div>
+<p>Here is an example of getting a CUDA image from NVIDIA and adding opengl to it:</p>
+<ol class="arabic">
+<li><p>Pull the container from Harbor:
+<code class="docutils literal notranslate"><span class="pre">podman</span> <span class="pre">pull</span> <span class="pre">erisxdl.partners.org/abc123/cuda:latest</span></code></p>
+<p>Again we can view the container with <code class="docutils literal notranslate"><span class="pre">podman</span> <span class="pre">images</span></code></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">REPOSITORY</span>                         <span class="n">TAG</span>      <span class="n">IMAGE</span> <span class="n">ID</span>       <span class="n">CREATED</span>       <span class="n">SIZE</span>
+<span class="n">erisxdl</span><span class="o">.</span><span class="n">partners</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">abc123</span><span class="o">/</span><span class="n">cuda</span>   <span class="n">latest</span>   <span class="mi">979</span><span class="n">cd1f9e2c8</span>   <span class="mi">2</span> <span class="n">weeks</span> <span class="n">ago</span>   <span class="mf">4.24</span> <span class="n">GB</span>
+</pre></div>
+</div>
+<p>Note the image ID.</p>
+</li>
+<li><p>Run the container:
+<code class="docutils literal notranslate"><span class="pre">podman</span> <span class="pre">run</span> <span class="pre">-it</span> <span class="pre">979cd1f9e2c8</span> <span class="pre">/bin/bash</span></code></p>
+<p>The <code class="docutils literal notranslate"><span class="pre">-it</span></code> flag opens and interactive terminal and is very common.</p>
+<p>Then install OpenGL:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">root</span><span class="o">@</span><span class="mf">54116e44</span><span class="n">f656</span><span class="p">:</span><span class="o">/</span><span class="c1"># apt-get upgrade</span>
+<span class="n">root</span><span class="o">@</span><span class="mf">54116e44</span><span class="n">f656</span><span class="p">:</span><span class="o">/</span><span class="c1"># apt-get install opengl</span>
+<span class="n">root</span><span class="o">@</span><span class="mf">54116e44</span><span class="n">f656</span><span class="p">:</span><span class="o">/</span><span class="c1"># exit</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</section>
 </section>
 </section>
 <section id="submitting-jobs">
@@ -354,7 +424,11 @@ document.write(`
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Using Containers</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#podman-and-harbor">Podman and Harbor</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#podman-and-harbor">Podman and Harbor</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pulling-an-existing-image">Pulling an Existing Image</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#customizing-an-existing-image">Customizing an Existing Image</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#submitting-jobs">Submitting Jobs</a></li>
