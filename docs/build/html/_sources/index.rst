@@ -1,4 +1,4 @@
-Mass General Brigham Computing Guide
+ERISXdl - Nirmal Lab Documentation
 =============================================
 
 This is documentation for getting started with computing at Mass General Brigham. It is based on the
@@ -42,12 +42,17 @@ There are several key differences between this documentation and the "official" 
 .. .. include:: usage.rst
 
 Getting Started
------------
+---------------
 .. include:: nirmalLabStart.md
    :parser: myst_parser.sphinx_
 
-Knowledge Base Links
----------
+Developing and Running Code on ERISXdl
+--------------------------------------
+.. include:: development.md
+   :parser: myst_parser.sphinx_
+
+Important Links
+---------------
 .. include:: knowledgeBaseLinks.md
    :parser: myst_parser.sphinx_
 

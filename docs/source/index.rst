@@ -1,4 +1,4 @@
-Mass General Brigham Computing Guide
+ERISXdl - Nirmal Lab Documentation
 =============================================
 
 This is documentation for getting started with computing at Mass General Brigham. It is based on the

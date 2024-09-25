@@ -25,7 +25,7 @@ The primary use of the ERISXdl for the Nirmal lab will be to run machine learnin
 # Logging In
 Log in via `ssh`:
 ```bash
-ssh <username<@ersisxdl.partners.org>
+ssh <username>@ersisxdl.partners.org
 ```
 You *must* be on the network to succesfully connect. If you are off-campus and wish to access ERISXdl, access the VPN by following [these instructions](https://partnershealthcare.service-now.com/isservicehub?id=kb_article_view&sysparm_article=KB0023967&sys_kb_id=79ad94774ff642005fcfdefd0210c747&spa=1).
 
