@@ -302,7 +302,10 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Using Containers</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Using Containers</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#podman-and-harbor">Podman and Harbor</a></li>
+</ul>
+</li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#submitting-jobs">Submitting Jobs</a></li>
 </ul>
 
@@ -318,7 +321,13 @@ document.write(`
                   
   <section id="using-containers">
 <h1>Using Containers<a class="headerlink" href="#using-containers" title="Link to this heading">#</a></h1>
-<p>In development</p>
+<p>If you want to run code in a reproducible, easy to share environment, Docker containers and images are excellent vehicles for running this code. Briefly and non-technically, running a Docker container is like running a computationally inexpensive isolated computer inside of your computer. The instructions for making the container come from the image. For more information on Docker containers and images, check out <a class="reference external" href="https://aws.amazon.com/compare/the-difference-between-docker-images-and-containers/">this article from AWS</a>. For a brief primer on making your own Docker images, check out <a class="reference external" href="https://containers-at-tacc.readthedocs.io/en/latest/containerize-your-code/overview.html">this article from TACC</a>.</p>
+<section id="podman-and-harbor">
+<h2>Podman and Harbor<a class="headerlink" href="#podman-and-harbor" title="Link to this heading">#</a></h2>
+<p><em>Adapted from <a class="reference external" href="https://rc.partners.org/kb/article/3718">https://rc.partners.org/kb/article/3718</a></em></p>
+<p>Docker can be extremely <a class="reference external" href="https://docs.docker.com/engine/security/">insecure and dangerous to run</a>. So exercise caution when pulling a new Docker image. Because of this, ERISXdl uses a tools called <a class="reference external" href="https://podman.io/">podman</a>. Other groups use apptainer/singularity as well. For our purposes, these are virtually the same as Docker as we are not concerned with root access.</p>
+<p>Harbor is a private container registry used by ERISXdl that you can use to push images. Harbor is used because ERISXdl is not connected to the internet.</p>
+</section>
 </section>
 <section id="submitting-jobs">
 <h1>Submitting Jobs<a class="headerlink" href="#submitting-jobs" title="Link to this heading">#</a></h1>
@@ -351,7 +360,10 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Using Containers</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Using Containers</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#podman-and-harbor">Podman and Harbor</a></li>
+</ul>
+</li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#submitting-jobs">Submitting Jobs</a></li>
 </ul>
 

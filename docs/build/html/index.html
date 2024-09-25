@@ -313,7 +313,10 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#developing-and-running-code-on-erisxdl">Developing and Running Code on ERISXdl</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-containers">Using Containers</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-containers">Using Containers</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#podman-and-harbor">Podman and Harbor</a></li>
+</ul>
+</li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#submitting-jobs">Submitting Jobs</a></li>
 </ul>
 </li>
@@ -432,7 +435,13 @@ in the niche environment of high-performance computing.</p>
 <h2>Developing and Running Code on ERISXdl<a class="headerlink" href="#developing-and-running-code-on-erisxdl" title="Link to this heading">#</a></h2>
 <section id="using-containers">
 <h3>Using Containers<a class="headerlink" href="#using-containers" title="Link to this heading">#</a></h3>
-<p>In development</p>
+<p>If you want to run code in a reproducible, easy to share environment, Docker containers and images are excellent vehicles for running this code. Briefly and non-technically, running a Docker container is like running a computationally inexpensive isolated computer inside of your computer. The instructions for making the container come from the image. For more information on Docker containers and images, check out <a class="reference external" href="https://aws.amazon.com/compare/the-difference-between-docker-images-and-containers/">this article from AWS</a>. For a brief primer on making your own Docker images, check out <a class="reference external" href="https://containers-at-tacc.readthedocs.io/en/latest/containerize-your-code/overview.html">this article from TACC</a>.</p>
+<section id="podman-and-harbor">
+<h4>Podman and Harbor<a class="headerlink" href="#podman-and-harbor" title="Link to this heading">#</a></h4>
+<p><em>Adapted from <a class="reference external" href="https://rc.partners.org/kb/article/3718">https://rc.partners.org/kb/article/3718</a></em></p>
+<p>Docker can be extremely <a class="reference external" href="https://docs.docker.com/engine/security/">insecure and dangerous to run</a>. So exercise caution when pulling a new Docker image. Because of this, ERISXdl uses a tools called <a class="reference external" href="https://podman.io/">podman</a>. Other groups use apptainer/singularity as well. For our purposes, these are virtually the same as Docker as we are not concerned with root access.</p>
+<p>Harbor is a private container registry used by ERISXdl that you can use to push images. Harbor is used because ERISXdl is not connected to the internet.</p>
+</section>
 </section>
 <section id="submitting-jobs">
 <h3>Submitting Jobs<a class="headerlink" href="#submitting-jobs" title="Link to this heading">#</a></h3>
@@ -443,19 +452,19 @@ in the niche environment of high-performance computing.</p>
 <section id="mass-general-brigham-knowledge-base-links">
 <h3>Mass General Brigham Knowledge Base Links<a class="headerlink" href="#mass-general-brigham-knowledge-base-links" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p><a class="reference external" href="https://rc.partners.org/kb/computational-resources/erisxdl?article=3650">ERISXdl Intro article</a></p></li>
-<li><p><a class="reference external" href="https://rc.partners.org/kb/computational-resources/erisxdl?article=3654">ERISXdl Getting Started</a></p></li>
+<li><p><a class="reference external" href="https://rc.partners.org/kb/computational-resources/erisxdl?article=3650">ERISXdl intro article</a></p></li>
+<li><p><a class="reference external" href="https://rc.partners.org/kb/computational-resources/erisxdl?article=3654">ERISXdl getting started</a></p></li>
 <li><p><a class="reference external" href="https://rc.partners.org/kb/computational-resources/linux-cluster/files-and-storage?article=1571">Storage/quota information</a></p></li>
 <li><p><a class="reference external" href="https://rc.partners.org/kb/article/3718">Using Docker containers with Podman on ERISXdl</a></p></li>
-<li><p><a class="reference external" href="https://rc.partners.org/kb/research/computational-resources/erisxdl?article=3719">Using SLURM Job Scheduler</a></p></li>
+<li><p><a class="reference external" href="https://rc.partners.org/kb/research/computational-resources/erisxdl?article=3719">Using SLURM job scheduler</a></p></li>
 <li><p><a class="reference external" href="https://rc.partners.org/kb/computational-resources/erisxdl?article=4087">Information about slurm monitoring with grafana</a></p></li>
 </ul>
 </section>
 <section id="other-important-links">
 <h3>Other Important Links<a class="headerlink" href="#other-important-links" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p><a class="reference external" href="https://erisxdl.partners.org/harbor/sign-in?redirect_url=%2Fharbor%2Fprojects">Harbor Link</a></p></li>
-<li><p><a class="reference external" href="https://rc.partners.org/scic-cluster-account-request">Account Request</a></p></li>
+<li><p><a class="reference external" href="https://erisxdl.partners.org/harbor/sign-in?redirect_url=%2Fharbor%2Fprojects">Harbor account through partners for ERISXdl</a></p></li>
+<li><p><a class="reference external" href="https://rc.partners.org/scic-cluster-account-request">Account request</a></p></li>
 <li><p><a class="reference external" href="https://rcservices.partners.org/">Briefcase storage request</a></p></li>
 </ul>
 </section>
@@ -508,7 +517,10 @@ in the niche environment of high-performance computing.</p>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#developing-and-running-code-on-erisxdl">Developing and Running Code on ERISXdl</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-containers">Using Containers</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-containers">Using Containers</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#podman-and-harbor">Podman and Harbor</a></li>
+</ul>
+</li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#submitting-jobs">Submitting Jobs</a></li>
 </ul>
 </li>

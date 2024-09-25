@@ -20,13 +20,14 @@ ERISXdl platform provides:
 - Jupyter notebooks for rapid development, integration with Github and HPC scheduler Slurm to distribute the workload across the system.
 - Access to high-bandwidth, low-latency Briefcase storage (__Authors Note: I'll explain what this is later__).
 
-The primary use of the ERISXdl for the Nirmal lab will be to run machine learning models with GPU acceleration (the only real feasible way to run these). As of 09/24, GPU compute units will cost $0.01/GPU/min. So no pressure, but it will cost you some money. 
+The primary use of the ERISXdl for the Nirmal lab will be to run machine learning models with GPU acceleration (the only real feasible way to run these). As of 09/24, GPU compute units will cost $0.01/GPU/min. So no pressure, but it will cost some money for running a job. 
 
 # Logging In
 Log in via `ssh`:
-```bash
+```{code} bash
 ssh <username>@ersisxdl.partners.org
 ```
+
 You *must* be on the network to succesfully connect. If you are off-campus and wish to access ERISXdl, access the VPN by following [these instructions](https://partnershealthcare.service-now.com/isservicehub?id=kb_article_view&sysparm_article=KB0023967&sys_kb_id=79ad94774ff642005fcfdefd0210c747&spa=1).
 
 ## Navigating ERISXdl
