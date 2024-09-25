@@ -153,6 +153,7 @@
 <li class="toctree-l1"><a class="reference internal" href="knowledgeBaseLinks.html">Mass General Brigham Knowledge Base Links</a></li>
 <li class="toctree-l1"><a class="reference internal" href="nirmalLabStart.html">Preliminary Steps for Nirmal Lab Members</a></li>
 
+
 </ul>
 
     </div>
@@ -304,6 +305,10 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-started">Getting Started</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#preliminary-steps-for-nirmal-lab-members">Preliminary Steps for Nirmal Lab Members</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#system-architecture">System Architecture</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#logging-in">Logging In</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#navigating-erisxdl">Navigating ERISXdl</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#knowledge-base-links">Knowledge Base Links</a><ul class="nav section-nav flex-column">
@@ -339,8 +344,8 @@ in the niche environment of high-performance computing.</p>
 <li><p>These documents are meant to guide users succesively, starting with information about the available partitions, modules, and development.</p></li>
 <li><p>These documents are meant to be displayed in a coherent manner, meaning that a user can see where they are in each section (notably this is missing from the knowledge base).</p></li>
 </ul>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
 <p>This project is under active development. Good documentation is rare/non-existent. If you have questions please email me at <a class="reference external" href="mailto:tjost&#37;&#52;&#48;bwh&#46;harvard&#46;edu">tjost<span>&#64;</span>bwh<span>&#46;</span>harvard<span>&#46;</span>edu</a>.</p>
 <p>Additionally, this project is open-source and hosted on GitHub at <a class="reference external" href="https://www.github.com/tylerjost/erisDocs/">www.github.com/tylerjost/erisDocs</a>.</p>
 </div>
@@ -352,7 +357,7 @@ in the niche environment of high-performance computing.</p>
 <h3>Preliminary Steps for Nirmal Lab Members<a class="headerlink" href="#preliminary-steps-for-nirmal-lab-members" title="Link to this heading">#</a></h3>
 <ol class="arabic simple">
 <li><p>First, request an account using this link: <a class="reference external" href="https://rc.partners.org/scic-cluster-account-request">https://rc.partners.org/scic-cluster-account-request</a></p></li>
-<li><p><em>Requesting an account does not give you access to ERISXdl</em>. To remedy this, you need to ask Jay Omobono (IT support) at <a class="reference internal" href="#jomobono&#64;bwh.harvard.edu"><span class="xref myst">jomobono&#64;bwh.harvard.edu</span></a> and CC Dr. Nirmal to request access for this machine.</p></li>
+<li><p><em>Requesting an account does not give you access to ERISXdl</em>. To remedy this, you need to ask Jay Omobono (IT support) at <a class="reference internal" href="#jomobono&#64;bwh.harvard.edu"><span class="xref myst">jomobono&#64;bwh.harvard.edu</span></a> and CC Dr. Nirmal to request access for this machine. If this fails contact support requesting to be added at <a class="reference internal" href="#hpcsupport&#64;partners.org"><span class="xref myst">hpcsupport&#64;partners.org</span></a>.</p></li>
 <li><p>Verify your access to the group by calling <code class="docutils literal notranslate"><span class="pre">groups</span></code> from the command line.</p></li>
 </ol>
 </section>
@@ -370,20 +375,36 @@ in the niche environment of high-performance computing.</p>
 <li><p>Jupyter notebooks for rapid development, integration with Github and HPC scheduler Slurm to distribute the workload across the system.</p></li>
 <li><p>Access to high-bandwidth, low-latency Briefcase storage (<strong>Authors Note: I’ll explain what this is later</strong>).</p></li>
 </ul>
+<p>The primary use of the ERISXdl for the Nirmal lab will be to run machine learning models with GPU acceleration (the only real feasible way to run these). As of 09/24, GPU compute units will cost $0.01/GPU/min. So no pressure, but it will cost you some money.</p>
+</section>
+<section id="logging-in">
+<h3>Logging In<a class="headerlink" href="#logging-in" title="Link to this heading">#</a></h3>
+<p>Log in via <code class="docutils literal notranslate"><span class="pre">ssh</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ssh<span class="w"> </span>&lt;username&lt;@ersisxdl.partners.org&gt;
+</pre></div>
+</div>
+<p>You <em>must</em> be on the network to succesfully connect. If you are off-campus and wish to access ERISXdl, access the VPN by following <a class="reference external" href="https://partnershealthcare.service-now.com/isservicehub?id=kb_article_view&amp;amp;sysparm_article=KB0023967&amp;amp;sys_kb_id=79ad94774ff642005fcfdefd0210c747&amp;amp;spa=1">these instructions</a>.</p>
+<section id="navigating-erisxdl">
+<h4>Navigating ERISXdl<a class="headerlink" href="#navigating-erisxdl" title="Link to this heading">#</a></h4>
+<div class="admonition error">
+<p class="admonition-title">Error</p>
+<p>This portion is incomplete until we acquire a briefcase account.</p>
+</div>
+</section>
 </section>
 </section>
 <section id="knowledge-base-links">
 <h2>Knowledge Base Links<a class="headerlink" href="#knowledge-base-links" title="Link to this heading">#</a></h2>
 <section id="mass-general-brigham-knowledge-base-links">
 <h3>Mass General Brigham Knowledge Base Links<a class="headerlink" href="#mass-general-brigham-knowledge-base-links" title="Link to this heading">#</a></h3>
-<p>Sadly in no general order 🙃</p>
 <ul class="simple">
+<li><p><a class="reference external" href="https://rc.partners.org/kb/computational-resources/erisxdl?article=3650">ERISXdl Intro article</a></p></li>
+<li><p><a class="reference external" href="https://rc.partners.org/kb/computational-resources/erisxdl?article=3654">ERISXdl Getting Started</a></p></li>
+<li><p><a class="reference external" href="https://rc.partners.org/kb/computational-resources/linux-cluster/files-and-storage?article=1571">Storage/quota information</a></p></li>
 <li><p><a class="reference external" href="https://rc.partners.org/kb/article/3718">Using Docker containers with Podman on ERISXdl</a></p></li>
 <li><p><a class="reference external" href="https://rc.partners.org/kb/research/computational-resources/erisxdl?article=3719">Using SLURM Job Scheduler</a></p></li>
-<li><p><a class="reference external" href="https://rc.partners.org/kb/computational-resources/erisxdl?article=3654">ERISXdl Getting Started</a></p></li>
-<li><p><a class="reference external" href="https://rc.partners.org/kb/computational-resources/erisxdl?article=3650">ERISXdl Intro article</a></p></li>
+<li><p><a class="reference external" href="https://erisxdl.partners.org/harbor/sign-in?redirect_url=%2Fharbor%2Fprojects">Harbor Link</a></p></li>
 <li><p><a class="reference external" href="https://rc.partners.org/kb/computational-resources/erisxdl?article=4087">Information about slurm monitoring with grafana</a></p></li>
-<li><p><a class="reference external" href="https://rc.partners.org/kb/computational-resources/linux-cluster/files-and-storage?article=1571">Storage/quota information</a></p></li>
 </ul>
 </section>
 </section>
@@ -428,6 +449,10 @@ in the niche environment of high-performance computing.</p>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#getting-started">Getting Started</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#preliminary-steps-for-nirmal-lab-members">Preliminary Steps for Nirmal Lab Members</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#system-architecture">System Architecture</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#logging-in">Logging In</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#navigating-erisxdl">Navigating ERISXdl</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#knowledge-base-links">Knowledge Base Links</a><ul class="nav section-nav flex-column">

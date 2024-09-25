@@ -1,7 +1,7 @@
 # Preliminary Steps for Nirmal Lab Members
 
 1. First, request an account using this link: [https://rc.partners.org/scic-cluster-account-request](https://rc.partners.org/scic-cluster-account-request)
-2. *Requesting an account does not give you access to ERISXdl*. To remedy this, you need to ask Jay Omobono (IT support) at [jomobono@bwh.harvard.edu](jomobono@bwh.harvard.edu) and CC Dr. Nirmal to request access for this machine. 
+2. *Requesting an account does not give you access to ERISXdl*. To remedy this, you need to ask Jay Omobono (IT support) at [jomobono@bwh.harvard.edu](jomobono@bwh.harvard.edu) and CC Dr. Nirmal to request access for this machine. If this fails contact support requesting to be added at [hpcsupport@partners.org](hpcsupport@partners.org). 
 3. Verify your access to the group by calling `groups` from the command line. 
 
 # System Architecture
@@ -19,3 +19,19 @@ ERISXdl platform provides:
 - Kubernetes and Docker containerized environments to easily emulate the entire software workflow and maintain portability and reproducibility.
 - Jupyter notebooks for rapid development, integration with Github and HPC scheduler Slurm to distribute the workload across the system.
 - Access to high-bandwidth, low-latency Briefcase storage (__Authors Note: I'll explain what this is later__).
+
+The primary use of the ERISXdl for the Nirmal lab will be to run machine learning models with GPU acceleration (the only real feasible way to run these). As of 09/24, GPU compute units will cost $0.01/GPU/min. So no pressure, but it will cost you some money. 
+
+# Logging In
+Log in via `ssh`:
+```bash
+ssh <username<@ersisxdl.partners.org>
+```
+You *must* be on the network to succesfully connect. If you are off-campus and wish to access ERISXdl, access the VPN by following [these instructions](https://partnershealthcare.service-now.com/isservicehub?id=kb_article_view&sysparm_article=KB0023967&sys_kb_id=79ad94774ff642005fcfdefd0210c747&spa=1).
+
+## Navigating ERISXdl
+```{error}
+This portion is incomplete until we acquire a briefcase account. 
+```
+
+There are 3 login nodes: `erisxdl1`, `erisxdl2`, and `erisxdl3`. Login nodes are meant for editing code and moving files and are __never__ for running code. Typically these are shared resources so if you try and run a script on a login node, it can mess with other people trying to set up their run. The system administrators will also be very unhappy and this could potentially lead to (as yet undefined) consequences. But if you were to run something on a login node, it would likely be an accident anyways. 

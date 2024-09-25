@@ -21,7 +21,7 @@ There are several key differences between this documentation and the "official" 
 
 
 
-.. note::
+.. warning::
 
    This project is under active development. Good documentation is rare/non-existent. If you have questions please email me at tjost@bwh.harvard.edu.
    

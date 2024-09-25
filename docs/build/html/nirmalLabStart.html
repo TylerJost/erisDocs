@@ -151,6 +151,7 @@
 <li class="toctree-l1"><a class="reference internal" href="knowledgeBaseLinks.html">Mass General Brigham Knowledge Base Links</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Preliminary Steps for Nirmal Lab Members</a></li>
 
+
 </ul>
 
     </div>
@@ -301,6 +302,10 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Preliminary Steps for Nirmal Lab Members</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#system-architecture">System Architecture</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#logging-in">Logging In</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#navigating-erisxdl">Navigating ERISXdl</a></li>
+</ul>
+</li>
 </ul>
 
             </nav>
@@ -317,7 +322,7 @@ document.write(`
 <h1>Preliminary Steps for Nirmal Lab Members<a class="headerlink" href="#preliminary-steps-for-nirmal-lab-members" title="Link to this heading">#</a></h1>
 <ol class="arabic simple">
 <li><p>First, request an account using this link: <a class="reference external" href="https://rc.partners.org/scic-cluster-account-request">https://rc.partners.org/scic-cluster-account-request</a></p></li>
-<li><p><em>Requesting an account does not give you access to ERISXdl</em>. To remedy this, you need to ask Jay Omobono (IT support) at <a class="reference internal" href="#jomobono&#64;bwh.harvard.edu"><span class="xref myst">jomobono&#64;bwh.harvard.edu</span></a> and CC Dr. Nirmal to request access for this machine.</p></li>
+<li><p><em>Requesting an account does not give you access to ERISXdl</em>. To remedy this, you need to ask Jay Omobono (IT support) at <a class="reference internal" href="#jomobono&#64;bwh.harvard.edu"><span class="xref myst">jomobono&#64;bwh.harvard.edu</span></a> and CC Dr. Nirmal to request access for this machine. If this fails contact support requesting to be added at <a class="reference internal" href="#hpcsupport&#64;partners.org"><span class="xref myst">hpcsupport&#64;partners.org</span></a>.</p></li>
 <li><p>Verify your access to the group by calling <code class="docutils literal notranslate"><span class="pre">groups</span></code> from the command line.</p></li>
 </ol>
 </section>
@@ -335,6 +340,22 @@ document.write(`
 <li><p>Jupyter notebooks for rapid development, integration with Github and HPC scheduler Slurm to distribute the workload across the system.</p></li>
 <li><p>Access to high-bandwidth, low-latency Briefcase storage (<strong>Authors Note: I’ll explain what this is later</strong>).</p></li>
 </ul>
+<p>The primary use of the ERISXdl for the Nirmal lab will be to run machine learning models with GPU acceleration (the only real feasible way to run these). As of 09/24, GPU compute units will cost $0.01/GPU/min. So no pressure, but it will cost you some money.</p>
+</section>
+<section id="logging-in">
+<h1>Logging In<a class="headerlink" href="#logging-in" title="Link to this heading">#</a></h1>
+<p>Log in via <code class="docutils literal notranslate"><span class="pre">ssh</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ssh<span class="w"> </span>&lt;username&lt;@ersisxdl.partners.org&gt;
+</pre></div>
+</div>
+<p>You <em>must</em> be on the network to succesfully connect. If you are off-campus and wish to access ERISXdl, access the VPN by following <a class="reference external" href="https://partnershealthcare.service-now.com/isservicehub?id=kb_article_view&amp;amp;sysparm_article=KB0023967&amp;amp;sys_kb_id=79ad94774ff642005fcfdefd0210c747&amp;amp;spa=1">these instructions</a>.</p>
+<section id="navigating-erisxdl">
+<h2>Navigating ERISXdl<a class="headerlink" href="#navigating-erisxdl" title="Link to this heading">#</a></h2>
+<div class="admonition error">
+<p class="admonition-title">Error</p>
+<p>This portion is incomplete until we acquire a briefcase account.</p>
+</div>
+</section>
 </section>
 
 
@@ -375,6 +396,10 @@ document.write(`
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Preliminary Steps for Nirmal Lab Members</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#system-architecture">System Architecture</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#logging-in">Logging In</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#navigating-erisxdl">Navigating ERISXdl</a></li>
+</ul>
+</li>
 </ul>
 
   </nav></div>
