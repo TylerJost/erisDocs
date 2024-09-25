@@ -12,8 +12,9 @@ computing documentation. It is part self-written, part collection of documents f
    in the niche environment of high-performance computing. 
 
 These documents:
+
 - Focus on ERISXdl, the GPU computing cluster.
-- Aim more up to date. They will only use :code:`SLURM`, etc.
+- Aim to be more up to date. They will only use :code:`SLURM`, etc.
 - Guide users succesively, starting with information about the available partitions, modules, and development.
 - Are displayed on one page such that a user can navigate forwards and backwards through without refreshing a new page.
 
@@ -30,9 +31,6 @@ These documents:
    :titlesonly:
    :hidden:
 
-
-   knowledgeBaseLinks
-   nirmalLabStart
 
 
 .. usage

@@ -28,9 +28,9 @@ exclude_patterns = []
 html_theme = 'sphinx_book_theme'
 # html_theme = 'sphinx_rtd_theme'
 
-# html_theme_options = {
-#     'collapse_navigation': False,  # Keeps the sidebar expanded
-#     'navigation_depth': 4,         # Set this to the depth of your ToC
-# }
+html_theme_options = {
+    'collapse_navigation': False,  # Keeps the sidebar expanded
+    'navigation_depth': 4,         # Set this to the depth of your ToC
+}
 html_static_path = ['_static']
 source_suffix = ['.rst', '.md']
