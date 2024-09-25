@@ -20,7 +20,7 @@ ERISXdl platform provides:
 - Jupyter notebooks for rapid development, integration with Github and HPC scheduler Slurm to distribute the workload across the system.
 - Access to high-bandwidth, low-latency Briefcase storage (__Authors Note: I'll explain what this is later__).
 
-The primary use of the ERISXdl for the Nirmal lab will be to run machine learning models with GPU acceleration (the only real feasible way to run these). As of 09/24, GPU compute units will cost $0.01/GPU/min. So no pressure, but it will cost you some money. 
+The primary use of the ERISXdl for the Nirmal lab will be to run machine learning models with GPU acceleration (the only real feasible way to run these). As of 09/24, GPU compute units will cost $0.01/GPU/min. So no pressure, but it will cost some money for running a job. 
 
 # Logging In
 Log in via `ssh`:

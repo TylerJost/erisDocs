@@ -11,13 +11,11 @@ computing documentation. It is part self-written, part collection of documents f
    you understand the way that ERISXdl is structured, the specific software stack it uses, or that you have any background
    in the niche environment of high-performance computing. 
 
-
-There are several key differences between this documentation and the "official" knowledge base:
-
-- These documents focus on ERISXdl, the GPU computing cluster.
-- These documents are (arguably) more up to date. They will only use :code:`SLURM`, etc.
-- These documents are meant to guide users succesively, starting with information about the available partitions, modules, and development.
-- These documents are meant to be displayed in a coherent manner, meaning that a user can see where they are in each section (notably this is missing from the knowledge base).
+These documents:
+- Focus on ERISXdl, the GPU computing cluster.
+- Aim more up to date. They will only use :code:`SLURM`, etc.
+- Guide users succesively, starting with information about the available partitions, modules, and development.
+- Are displayed on one page such that a user can navigate forwards and backwards through without refreshing a new page.
 
 
 
