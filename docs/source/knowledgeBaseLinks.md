@@ -9,9 +9,14 @@
 
 - [Using SLURM Job Scheduler](https://rc.partners.org/kb/research/computational-resources/erisxdl?article=3719)
 
+- [Information about slurm monitoring with grafana](https://rc.partners.org/kb/computational-resources/erisxdl?article=4087)
+
+# Other Important Links
 - [Harbor Link](https://erisxdl.partners.org/harbor/sign-in?redirect_url=%2Fharbor%2Fprojects)
 
-- [Information about slurm monitoring with grafana](https://rc.partners.org/kb/computational-resources/erisxdl?article=4087)
+- [Account Request](https://rc.partners.org/scic-cluster-account-request)
+
+- [Briefcase storage request](https://rcservices.partners.org/)
 
  
 

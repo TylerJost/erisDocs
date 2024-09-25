@@ -390,6 +390,34 @@ in the niche environment of high-performance computing.</p>
 <p class="admonition-title">Error</p>
 <p>This portion is incomplete until we acquire a briefcase account.</p>
 </div>
+<p>There are 3 login nodes: <code class="docutils literal notranslate"><span class="pre">erisxdl1</span></code>, <code class="docutils literal notranslate"><span class="pre">erisxdl2</span></code>, and <code class="docutils literal notranslate"><span class="pre">erisxdl3</span></code>. Login nodes are meant for editing code and moving files but are <strong>never</strong> for running code. Typically these are shared resources so if you try and run a script on a login node, it can mess with other people trying to set up their run. The system administrators will also be very unhappy and this could potentially lead to (as yet undefined) consequences. But if you were to run something on a login node, it would likely be an accident anyways.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>File System</p></th>
+<th class="head"><p>Quota</p></th>
+<th class="head"><p>Key Features</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">$HOME</span></code></p></td>
+<td><p>Soft limit of 200 GB and hard limit of 600 GB</p></td>
+<td><p>This is not backed up but is not purged.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">$SCRATCH</span></code></p></td>
+<td><p>500 GB</p></td>
+<td><p>Your personal scratch is symlinked in your home directory. You can symlink it yourself with <code class="docutils literal notranslate"><span class="pre">ln</span> <span class="pre">-s</span> <span class="pre">/scratch/${USER:0:1}/$USER</span> <span class="pre">scratch</span></code>. Files are deleted every 20 days.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">/data/briefcase</span></code></p></td>
+<td><p>To be determined</p></td>
+<td><p>This is the briefcase storage which will extend our ability to store data.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Remember, files in <code class="docutils literal notranslate"><span class="pre">$SCRATCH</span></code> are deleted every 20 days.</p>
+</div>
 </section>
 </section>
 </section>

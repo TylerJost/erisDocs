@@ -25,7 +25,7 @@ The primary use of the ERISXdl for the Nirmal lab will be to run machine learnin
 # Logging In
 Log in via `ssh`:
 ```bash
-ssh <username<@ersisxdl.partners.org>
+ssh <username>@ersisxdl.partners.org
 ```
 You *must* be on the network to succesfully connect. If you are off-campus and wish to access ERISXdl, access the VPN by following [these instructions](https://partnershealthcare.service-now.com/isservicehub?id=kb_article_view&sysparm_article=KB0023967&sys_kb_id=79ad94774ff642005fcfdefd0210c747&spa=1).
 
@@ -34,4 +34,14 @@ You *must* be on the network to succesfully connect. If you are off-campus and w
 This portion is incomplete until we acquire a briefcase account. 
 ```
 
-There are 3 login nodes: `erisxdl1`, `erisxdl2`, and `erisxdl3`. Login nodes are meant for editing code and moving files and are __never__ for running code. Typically these are shared resources so if you try and run a script on a login node, it can mess with other people trying to set up their run. The system administrators will also be very unhappy and this could potentially lead to (as yet undefined) consequences. But if you were to run something on a login node, it would likely be an accident anyways. 
+There are 3 login nodes: `erisxdl1`, `erisxdl2`, and `erisxdl3`. Login nodes are meant for editing code and moving files but are __never__ for running code. Typically these are shared resources so if you try and run a script on a login node, it can mess with other people trying to set up their run. The system administrators will also be very unhappy and this could potentially lead to (as yet undefined) consequences. But if you were to run something on a login node, it would likely be an accident anyways. 
+
+| File System | Quota | Key Features |
+| ----------- | ----- | ------------ |
+| `$HOME` | Soft limit of 200 GB and hard limit of 600 GB | This is not backed up but is not purged.  | 
+| `$SCRATCH` | 500 GB | Your personal scratch is symlinked in your home directory. You can symlink it yourself with `ln -s /scratch/${USER:0:1}/$USER scratch`. Files are deleted every 20 days.| 
+| `/data/briefcase` | To be determined | This is the briefcase storage which will extend our ability to store data. |
+
+```{warning}
+Remember, files in `$SCRATCH` are deleted every 20 days. 
+```
