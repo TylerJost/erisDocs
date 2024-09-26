@@ -66,28 +66,27 @@ If you wanted to, you could now use this image for running your code through a s
 If you spin up a container from an image, this gives you root access to the container. This means you could install python, a package manager, etc inside the container. You could then commit these changes to a new image, then upload this to Harbor and use it.
 
 ```{warning}
-__Author's Note__
-Customizing an existing image is an extremely convenient feature. However, other than a record of file changes, there is very little reproducibility in this. It is highly recommended (by me) that you create dockerfiles that generate images you can use.
+__Author's Note__: Customizing an existing image is an extremely convenient feature. However, other than a record of file changes, there is very little reproducibility in this. It is highly recommended (by me) that you create dockerfiles that generate images you can use.
 ```
-Here is an example of getting a basic Ubuntu image and adding `curl` to it:
+Here is an example for getting a basic Ubuntu image and adding `curl` to it:
 
 1. Pull the container from Harbor:
+
     `podman pull docker.io/ubuntu:22.04`
 
     Again we can view the container with `podman images`
-    ```bash
+    ```text
     REPOSITORY                 TAG     IMAGE ID       CREATED       SIZE
     docker.io/library/ubuntu   22.04   97271d29cb79   2 weeks ago   80.4 MB
     ```
-
-    Note the image ID.
 2. Run the container:
+
     `podman run -it 97271d29cb79 /bin/bash`
 
-    The `-it` flag opens and interactive terminal and is very common.
+    The `-it` flag opens an interactive terminal where you are the root user. Note that we are running the image based on its `IMAGE ID`. 
 
     Then install curl and verify it's working:
-    ```bash
+    ```text
     root@54116e44f656:/# apt-get upgrade
     root@54116e44f656:/# apt-get install curl
     root@54116e44f656:/# curl cht.sh/docker
@@ -96,9 +95,10 @@ Here is an example of getting a basic Ubuntu image and adding `curl` to it:
 
     Now we have a running container that has both Ubuntu and `curl`. 
 3. View the running containers:
+
     `podman ps -a`
 
-    ```bash
+    ```text
     CONTAINER ID  IMAGE                           COMMAND    CREATED         STATUS                    PORTS  NAMES
     1af08557edbe  docker.io/library/ubuntu:22.04  /bin/bash  11 minutes ago  Exited (0) 6 seconds ago         eager_blackburn
     ```
@@ -127,7 +127,7 @@ and make the following change using your favorite text editor:
 
 `graphroot = "/erisxdl/local/storage/abc123"`
 
-where abc123 corresponds to the userid. By this means podman will operate normally on all 3 login nodes, even in the case of node failure. However, the images available on each node will be different. The images stored in Harbor at 
+where abc123 corresponds to the userid. By this means podman will operate normally on all 3 login nodes, even in the case of node failure. However, the images available on each node will be different. The image is stored in Harbor at 
 
 `erisxdl.partners.org/<PAS Group Name in lowercase>`
 

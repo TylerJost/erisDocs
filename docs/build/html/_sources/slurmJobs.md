@@ -177,7 +177,7 @@ srun /data/erisxdl/kube-slurm/wrappers/kube-slurm-jupyter-job.sh
 ```
 Once again we generate environment values for the image and briefcase location. However, our final script is different. If we run the job submission script, we can check the log file and find output similar to:
 
-```
+```text
 ########################################################
 Your Jupyter Notebook URL will be: https://erisxdl.partners.org/jupyter/slurm-job-40592?token=980c481b4ce7a73c3ca6843cdb13c296f1450b4e1a4e3430
 ########################################################

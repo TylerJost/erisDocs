@@ -495,36 +495,34 @@ docker.io/library/alpine<span class="w">   </span>latest<span class="w">   </spa
 <p>If you spin up a container from an image, this gives you root access to the container. This means you could install python, a package manager, etc inside the container. You could then commit these changes to a new image, then upload this to Harbor and use it.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p><strong>Author’s Note</strong>
-Customizing an existing image is an extremely convenient feature. However, other than a record of file changes, there is very little reproducibility in this. It is highly recommended (by me) that you create dockerfiles that generate images you can use.</p>
+<p><strong>Author’s Note</strong>: Customizing an existing image is an extremely convenient feature. However, other than a record of file changes, there is very little reproducibility in this. It is highly recommended (by me) that you create dockerfiles that generate images you can use.</p>
 </div>
-<p>Here is an example of getting a basic Ubuntu image and adding <code class="docutils literal notranslate"><span class="pre">curl</span></code> to it:</p>
+<p>Here is an example for getting a basic Ubuntu image and adding <code class="docutils literal notranslate"><span class="pre">curl</span></code> to it:</p>
 <ol class="arabic">
-<li><p>Pull the container from Harbor:
-<code class="docutils literal notranslate"><span class="pre">podman</span> <span class="pre">pull</span> <span class="pre">docker.io/ubuntu:22.04</span></code></p>
+<li><p>Pull the container from Harbor:</p>
+<p><code class="docutils literal notranslate"><span class="pre">podman</span> <span class="pre">pull</span> <span class="pre">docker.io/ubuntu:22.04</span></code></p>
 <p>Again we can view the container with <code class="docutils literal notranslate"><span class="pre">podman</span> <span class="pre">images</span></code></p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>REPOSITORY<span class="w">                 </span>TAG<span class="w">     </span>IMAGE<span class="w"> </span>ID<span class="w">       </span>CREATED<span class="w">       </span>SIZE
-docker.io/library/ubuntu<span class="w">   </span><span class="m">22</span>.04<span class="w">   </span>97271d29cb79<span class="w">   </span><span class="m">2</span><span class="w"> </span>weeks<span class="w"> </span>ago<span class="w">   </span><span class="m">80</span>.4<span class="w"> </span>MB
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>REPOSITORY                 TAG     IMAGE ID       CREATED       SIZE
+docker.io/library/ubuntu   22.04   97271d29cb79   2 weeks ago   80.4 MB
 </pre></div>
 </div>
-<p>Note the image ID.</p>
 </li>
-<li><p>Run the container:
-<code class="docutils literal notranslate"><span class="pre">podman</span> <span class="pre">run</span> <span class="pre">-it</span> <span class="pre">97271d29cb79</span> <span class="pre">/bin/bash</span></code></p>
-<p>The <code class="docutils literal notranslate"><span class="pre">-it</span></code> flag opens and interactive terminal and is very common.</p>
+<li><p>Run the container:</p>
+<p><code class="docutils literal notranslate"><span class="pre">podman</span> <span class="pre">run</span> <span class="pre">-it</span> <span class="pre">97271d29cb79</span> <span class="pre">/bin/bash</span></code></p>
+<p>The <code class="docutils literal notranslate"><span class="pre">-it</span></code> flag opens an interactive terminal where you are the root user. Note that we are running the image based on its <code class="docutils literal notranslate"><span class="pre">IMAGE</span> <span class="pre">ID</span></code>.</p>
 <p>Then install curl and verify it’s working:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>root@54116e44f656:/#<span class="w"> </span>apt-get<span class="w"> </span>upgrade
-root@54116e44f656:/#<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>curl
-root@54116e44f656:/#<span class="w"> </span>curl<span class="w"> </span>cht.sh/docker
-root@54116e44f656:/#<span class="w"> </span><span class="nb">exit</span>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>root@54116e44f656:/# apt-get upgrade
+root@54116e44f656:/# apt-get install curl
+root@54116e44f656:/# curl cht.sh/docker
+root@54116e44f656:/# exit
 </pre></div>
 </div>
 <p>Now we have a running container that has both Ubuntu and <code class="docutils literal notranslate"><span class="pre">curl</span></code>.</p>
 </li>
-<li><p>View the running containers:
-<code class="docutils literal notranslate"><span class="pre">podman</span> <span class="pre">ps</span> <span class="pre">-a</span></code></p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>CONTAINER<span class="w"> </span>ID<span class="w">  </span>IMAGE<span class="w">                           </span>COMMAND<span class="w">    </span>CREATED<span class="w">         </span>STATUS<span class="w">                    </span>PORTS<span class="w">  </span>NAMES
-1af08557edbe<span class="w">  </span>docker.io/library/ubuntu:22.04<span class="w">  </span>/bin/bash<span class="w">  </span><span class="m">11</span><span class="w"> </span>minutes<span class="w"> </span>ago<span class="w">  </span>Exited<span class="w"> </span><span class="o">(</span><span class="m">0</span><span class="o">)</span><span class="w"> </span><span class="m">6</span><span class="w"> </span>seconds<span class="w"> </span>ago<span class="w">         </span>eager_blackburn
+<li><p>View the running containers:</p>
+<p><code class="docutils literal notranslate"><span class="pre">podman</span> <span class="pre">ps</span> <span class="pre">-a</span></code></p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>CONTAINER ID  IMAGE                           COMMAND    CREATED         STATUS                    PORTS  NAMES
+1af08557edbe  docker.io/library/ubuntu:22.04  /bin/bash  11 minutes ago  Exited (0) 6 seconds ago         eager_blackburn
 </pre></div>
 </div>
 <p>You might note that containers have both a <code class="docutils literal notranslate"><span class="pre">CONTAINER</span> <span class="pre">ID</span></code> and a <code class="docutils literal notranslate"><span class="pre">NAME</span></code>.</p>
@@ -545,7 +543,7 @@ root@54116e44f656:/#<span class="w"> </span><span class="nb">exit</span>
 <p><code class="docutils literal notranslate"><span class="pre">~/.config/containers/storage.conf</span></code></p>
 <p>and make the following change using your favorite text editor:</p>
 <p><code class="docutils literal notranslate"><span class="pre">graphroot</span> <span class="pre">=</span> <span class="pre">&quot;/erisxdl/local/storage/abc123&quot;</span></code></p>
-<p>where abc123 corresponds to the userid. By this means podman will operate normally on all 3 login nodes, even in the case of node failure. However, the images available on each node will be different. The images stored in Harbor at</p>
+<p>where abc123 corresponds to the userid. By this means podman will operate normally on all 3 login nodes, even in the case of node failure. However, the images available on each node will be different. The image is stored in Harbor at</p>
 <p><code class="docutils literal notranslate"><span class="pre">erisxdl.partners.org/&lt;PAS</span> <span class="pre">Group</span> <span class="pre">Name</span> <span class="pre">in</span> <span class="pre">lowercase&gt;</span></code></p>
 <p>will of course always be available. If there is trouble please submit a request to hpcsupport to run</p>
 <p><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">./podman_reset.sh</span> <span class="pre">&lt;userID&gt;</span> <span class="pre">/erisxdl/local/storage</span></code></p>
@@ -794,7 +792,7 @@ srun<span class="w"> </span>/data/erisxdl/kube-slurm/wrappers/kube-slurm-jupyter
 </pre></div>
 </div>
 <p>Once again we generate environment values for the image and briefcase location. However, our final script is different. If we run the job submission script, we can check the log file and find output similar to:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>########################################################
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>########################################################
 Your Jupyter Notebook URL will be: https://erisxdl.partners.org/jupyter/slurm-job-40592?token=980c481b4ce7a73c3ca6843cdb13c296f1450b4e1a4e3430
 ########################################################
 </pre></div>
