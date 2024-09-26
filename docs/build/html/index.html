@@ -304,16 +304,28 @@ document.write(`
 </li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#developing-and-running-code-on-erisxdl">Developing and Running Code on ERISXdl</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-containers">Using Containers</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#podman-and-harbor">Podman and Harbor</a><ul class="nav section-nav flex-column">
-<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#pulling-an-existing-image">Pulling an Existing Image</a></li>
-<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#customizing-an-existing-image">Customizing an Existing Image</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-code-on-erisxdl">Running Code on ERISXdl</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#podman-and-harbor">Podman and Harbor</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pulling-an-existing-image">Pulling an Existing Image</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#customizing-an-existing-image">Customizing an Existing Image</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#podman-settings">Podman Settings</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#submitting-jobs">Submitting Jobs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#submitting-jobs-on-erisxdl">Submitting Jobs on ERISXdl</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-slurm-workload-manager">The Slurm Workload Manager</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#partitions-on-erisxdl">Partitions on ERISXdl</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#slurm-and-slurm-adjacent-commands">Slurm and Slurm-Adjacent Commands</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#fairshare-and-gpu-charges">Fairshare and GPU Charges</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#slurm-examples">Slurm Examples</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#using-a-customized-image">Using a Customized Image</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#important-links">Important Links</a><ul class="nav section-nav flex-column">
@@ -395,6 +407,7 @@ in the niche environment of high-performance computing.</p>
 <div class="admonition error">
 <p class="admonition-title">Error</p>
 <p>This portion is incomplete until we acquire a briefcase account.</p>
+<p>Make sure to replace <code class="docutils literal notranslate"><span class="pre">&lt;PAS</span> <span class="pre">Group</span> <span class="pre">Name</span> <span class="pre">in</span> <span class="pre">lowercase&gt;</span></code> with the group name after Briefcase storage is required.</p>
 </div>
 <p>There are 3 login nodes: <code class="docutils literal notranslate"><span class="pre">erisxdl1</span></code>, <code class="docutils literal notranslate"><span class="pre">erisxdl2</span></code>, and <code class="docutils literal notranslate"><span class="pre">erisxdl3</span></code>. Login nodes are meant for editing code and moving files but are <strong>never</strong> for running code. Typically these are shared resources so if you try and run a script on a login node, it can mess with other people trying to set up their run. The system administrators will also be very unhappy and this could potentially lead to (as yet undefined) consequences. But if you were to run something on a login node, it would likely be an accident anyways.</p>
 <div class="pst-scrollable-table-container"><table class="table">
@@ -427,30 +440,33 @@ in the niche environment of high-performance computing.</p>
 </section>
 </section>
 </section>
-<section id="developing-and-running-code-on-erisxdl">
-<h2>Developing and Running Code on ERISXdl<a class="headerlink" href="#developing-and-running-code-on-erisxdl" title="Link to this heading">#</a></h2>
-<section id="using-containers">
-<h3>Using Containers<a class="headerlink" href="#using-containers" title="Link to this heading">#</a></h3>
+<section id="running-code-on-erisxdl">
+<h2>Running Code on ERISXdl<a class="headerlink" href="#running-code-on-erisxdl" title="Link to this heading">#</a></h2>
+<!-- # Using Containers -->
 <p>If you want to run code in a reproducible, easy to share environment, Docker containers and images are excellent vehicles for running this code. Briefly and non-technically, running a Docker container is like running a computationally inexpensive isolated computer inside of your computer. The instructions for making the container come from the image. For more information on Docker containers and images, check out <a class="reference external" href="https://aws.amazon.com/compare/the-difference-between-docker-images-and-containers/">this article from AWS</a>. For a brief primer on making your own Docker images, check out <a class="reference external" href="https://containers-at-tacc.readthedocs.io/en/latest/containerize-your-code/overview.html">this article from TACC</a>.</p>
 <section id="podman-and-harbor">
-<h4>Podman and Harbor<a class="headerlink" href="#podman-and-harbor" title="Link to this heading">#</a></h4>
+<h3>Podman and Harbor<a class="headerlink" href="#podman-and-harbor" title="Link to this heading">#</a></h3>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
-<p>A lot of the official documentation is <strong>very</strong> loose with the terms container and image. When you are on ERISXdl, the end point is building an image which will in turn make a container that runs your code. Remember that images are templates for building containers. This might seem pedantic but is important when communicating to other technical people and important for not confusing new users. As a general rule:
-✅ You can push and pull a docker image and use it to make a container.
-❌ You can’t push and pull a docker container, but you can use it to run code.</p>
+<p>A lot of the official documentation is <strong>very</strong> loose with the terms container and image. When you are on ERISXdl, the end point is building an image which will in turn make a container that runs your code. Remember that images are templates for building containers. This might seem pedantic but is important when communicating to other technical people and important for not confusing new users. As a general rule:</p>
+<p>✅ You can push and pull a docker image and use it to make a container.</p>
+<p>❌ You can’t push and pull a docker container, but you can use it to run code.</p>
 </div>
+<p>ERISXdl uses two services called podman and Harbor. Podman is used because it provides extra security. For all intents and purposes, its syntax is largely interchangeable with docker’s commands.</p>
+<p>Harbor is a private container registry used by ERISXdl that you can use to push images. Harbor is used because ERISXdl is not connected to the internet but you will still want to access images.</p>
+<p>When you submit your job, you will specify the image you want by using a Harbor location. A wrapper script will be run that spins up a container using this image, then subsequently runs your job in that container. With podman/docker on the command line, Harbor will be referred to as erisxdl.partners.org.</p>
 <p><em>Adapted from <a class="reference external" href="https://rc.partners.org/kb/article/3718">https://rc.partners.org/kb/article/3718</a></em></p>
 <section id="pulling-an-existing-image">
-<h5>Pulling an Existing Image<a class="headerlink" href="#pulling-an-existing-image" title="Link to this heading">#</a></h5>
-<p>Docker can be extremely <a class="reference external" href="https://docs.docker.com/engine/security/">insecure and dangerous to run</a>. So exercise caution when pulling a new Docker image. Because of this, ERISXdl uses a tools called <a class="reference external" href="https://podman.io/">podman</a>. Other groups use apptainer/singularity as well. For our purposes, these are virtually the same as Docker as we are not concerned with root access.</p>
-<p>Harbor is a private container registry used by ERISXdl that you can use to push images. Harbor is used because ERISXdl is not connected to the internet but you will still want to access images. Let’s practice by grabbing an image, tagging it, then uploading it to Harbor.</p>
+<h4>Pulling an Existing Image<a class="headerlink" href="#pulling-an-existing-image" title="Link to this heading">#</a></h4>
+<p>Docker can be extremely <a class="reference external" href="https://docs.docker.com/engine/security/">insecure and dangerous to run</a>. So exercise caution when pulling a new Docker image, especially if you are on your personal machine and not using podman.</p>
+<p>Let’s practice using podman by grabbing an image, tagging it, then uploading it to Harbor.</p>
 <ol class="arabic">
 <li><p>Login to the registry you want to use:</p>
 <p>You can use dockerhub directly:</p>
 <p><code class="docutils literal notranslate"><span class="pre">podman</span> <span class="pre">login</span> <span class="pre">docker.io</span></code></p>
 <p>or use Harbor:</p>
 <p><code class="docutils literal notranslate"><span class="pre">podman</span> <span class="pre">login</span> <span class="pre">erisxdl.partners.org</span></code></p>
+<p>Remember: erisxdl.partners.org == Harbor</p>
 </li>
 <li><p>Search for an image (in this case a lightweight Linux distribution, Alpine Linux):</p>
 <p><code class="docutils literal notranslate"><span class="pre">podman</span> <span class="pre">search</span> <span class="pre">docker.io/alpine</span></code></p>
@@ -464,49 +480,225 @@ in the niche environment of high-performance computing.</p>
 </div>
 </li>
 <li><p>Tag the image:</p>
-<p><code class="docutils literal notranslate"><span class="pre">podman</span> <span class="pre">tag</span> <span class="pre">d4ff818577bc</span> <span class="pre">erisxdl.partners.org/&lt;PAS</span> <span class="pre">Group</span> <span class="pre">Name</span> <span class="pre">in</span> <span class="pre">lowercase&gt;/alpine:demo-copy</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">podman</span> <span class="pre">tag</span> <span class="pre">91ef0af61f39</span> <span class="pre">erisxdl.partners.org/&lt;PAS</span> <span class="pre">Group</span> <span class="pre">Name</span> <span class="pre">in</span> <span class="pre">lowercase&gt;/alpine:demo-copy</span></code></p>
+<p>Notice that we are specifying our image using its <code class="docutils literal notranslate"><span class="pre">IMAGE</span> <span class="pre">ID</span></code> and specifying Harbor as the registry.</p>
 </li>
 <li><p>Push the image to Harbor</p>
 <p><code class="docutils literal notranslate"><span class="pre">podman</span> <span class="pre">push</span> <span class="pre">erisxdl.partners.org/&lt;PAS</span> <span class="pre">Group</span> <span class="pre">Name</span> <span class="pre">in</span> <span class="pre">lowercase&gt;/alpine:demo-copy</span></code></p>
 </li>
 </ol>
-<p>If you wanted to, you could use this image for running your code.</p>
+<p>If you wanted to, you could now use this image for running your code through a submitted job.</p>
 </section>
 <section id="customizing-an-existing-image">
-<h5>Customizing an Existing Image<a class="headerlink" href="#customizing-an-existing-image" title="Link to this heading">#</a></h5>
+<h4>Customizing an Existing Image<a class="headerlink" href="#customizing-an-existing-image" title="Link to this heading">#</a></h4>
 <p>If you spin up a container from an image, this gives you root access to the container. This means you could install python, a package manager, etc inside the container. You could then commit these changes to a new image, then upload this to Harbor and use it.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p><strong>Author’s Note</strong>
 Customizing an existing image is an extremely convenient feature. However, other than a record of file changes, there is very little reproducibility in this. It is highly recommended (by me) that you create dockerfiles that generate images you can use.</p>
 </div>
-<p>Here is an example of getting a CUDA image from NVIDIA and adding opengl to it:</p>
+<p>Here is an example of getting a basic Ubuntu image and adding <code class="docutils literal notranslate"><span class="pre">curl</span></code> to it:</p>
 <ol class="arabic">
 <li><p>Pull the container from Harbor:
-<code class="docutils literal notranslate"><span class="pre">podman</span> <span class="pre">pull</span> <span class="pre">erisxdl.partners.org/abc123/cuda:latest</span></code></p>
+<code class="docutils literal notranslate"><span class="pre">podman</span> <span class="pre">pull</span> <span class="pre">docker.io/ubuntu:22.04</span></code></p>
 <p>Again we can view the container with <code class="docutils literal notranslate"><span class="pre">podman</span> <span class="pre">images</span></code></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">REPOSITORY</span>                         <span class="n">TAG</span>      <span class="n">IMAGE</span> <span class="n">ID</span>       <span class="n">CREATED</span>       <span class="n">SIZE</span>
-<span class="n">erisxdl</span><span class="o">.</span><span class="n">partners</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">abc123</span><span class="o">/</span><span class="n">cuda</span>   <span class="n">latest</span>   <span class="mi">979</span><span class="n">cd1f9e2c8</span>   <span class="mi">2</span> <span class="n">weeks</span> <span class="n">ago</span>   <span class="mf">4.24</span> <span class="n">GB</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">REPOSITORY</span>                 <span class="n">TAG</span>     <span class="n">IMAGE</span> <span class="n">ID</span>       <span class="n">CREATED</span>       <span class="n">SIZE</span>
+<span class="n">docker</span><span class="o">.</span><span class="n">io</span><span class="o">/</span><span class="n">library</span><span class="o">/</span><span class="n">ubuntu</span>   <span class="mf">22.04</span>   <span class="mi">97271</span><span class="n">d29cb79</span>   <span class="mi">2</span> <span class="n">weeks</span> <span class="n">ago</span>   <span class="mf">80.4</span> <span class="n">MB</span>
 </pre></div>
 </div>
 <p>Note the image ID.</p>
 </li>
 <li><p>Run the container:
-<code class="docutils literal notranslate"><span class="pre">podman</span> <span class="pre">run</span> <span class="pre">-it</span> <span class="pre">979cd1f9e2c8</span> <span class="pre">/bin/bash</span></code></p>
+<code class="docutils literal notranslate"><span class="pre">podman</span> <span class="pre">run</span> <span class="pre">-it</span> <span class="pre">97271d29cb79</span> <span class="pre">/bin/bash</span></code></p>
 <p>The <code class="docutils literal notranslate"><span class="pre">-it</span></code> flag opens and interactive terminal and is very common.</p>
-<p>Then install OpenGL:</p>
+<p>Then install curl and verify it’s working:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">root</span><span class="o">@</span><span class="mf">54116e44</span><span class="n">f656</span><span class="p">:</span><span class="o">/</span><span class="c1"># apt-get upgrade</span>
-<span class="n">root</span><span class="o">@</span><span class="mf">54116e44</span><span class="n">f656</span><span class="p">:</span><span class="o">/</span><span class="c1"># apt-get install opengl</span>
+<span class="n">root</span><span class="o">@</span><span class="mf">54116e44</span><span class="n">f656</span><span class="p">:</span><span class="o">/</span><span class="c1"># apt-get install curl</span>
+<span class="n">root</span><span class="o">@</span><span class="mf">54116e44</span><span class="n">f656</span><span class="p">:</span><span class="o">/</span><span class="c1"># curl cht.sh/docker</span>
 <span class="n">root</span><span class="o">@</span><span class="mf">54116e44</span><span class="n">f656</span><span class="p">:</span><span class="o">/</span><span class="c1"># exit</span>
 </pre></div>
 </div>
+<p>Now we have a running container that has both Ubuntu and <code class="docutils literal notranslate"><span class="pre">curl</span></code>.</p>
+</li>
+<li><p>View the running containers:
+<code class="docutils literal notranslate"><span class="pre">podman</span> <span class="pre">ps</span> <span class="pre">-a</span></code></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">CONTAINER</span> <span class="n">ID</span>  <span class="n">IMAGE</span>                           <span class="n">COMMAND</span>    <span class="n">CREATED</span>         <span class="n">STATUS</span>                    <span class="n">PORTS</span>  <span class="n">NAMES</span>
+<span class="mi">1</span><span class="n">af08557edbe</span>  <span class="n">docker</span><span class="o">.</span><span class="n">io</span><span class="o">/</span><span class="n">library</span><span class="o">/</span><span class="n">ubuntu</span><span class="p">:</span><span class="mf">22.04</span>  <span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">bash</span>  <span class="mi">11</span> <span class="n">minutes</span> <span class="n">ago</span>  <span class="n">Exited</span> <span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="mi">6</span> <span class="n">seconds</span> <span class="n">ago</span>         <span class="n">eager_blackburn</span>
+</pre></div>
+</div>
+<p>You might note that containers have both a <code class="docutils literal notranslate"><span class="pre">CONTAINER</span> <span class="pre">ID</span></code> and a <code class="docutils literal notranslate"><span class="pre">NAME</span></code>.</p>
+</li>
+<li><p>Commit the container to a new image:</p>
+<p><code class="docutils literal notranslate"><span class="pre">podman</span> <span class="pre">commit</span> <span class="pre">1af08557edbe</span> <span class="pre">erisxdl.partners.org/&lt;PAS</span> <span class="pre">Group</span> <span class="pre">Name</span> <span class="pre">in</span> <span class="pre">lowercase&gt;/ubuntu:now-with-curl</span></code></p>
+<p>Our image should be named ubuntu:now-with-curl.</p>
+<p>Remember: Your tag gives information but it will be hard to keep up with things like versioning and encompassing all changes through a tag alone.</p>
 </li>
 </ol>
 </section>
+<section id="podman-settings">
+<h4>Podman Settings<a class="headerlink" href="#podman-settings" title="Link to this heading">#</a></h4>
+<p><em>This comes directly from partners</em></p>
+<p>On ERISXdl there are three login nodes, erisxdl1, erisxdl2 and erisxdl3 and where each will contain differing collections of locally-stored images stored under</p>
+<p><code class="docutils literal notranslate"><span class="pre">/erisxdl[1-3]/local/storage</span></code></p>
+<p>In order to ensure the user has access to the images on a given node please locate the following file in the home directory</p>
+<p><code class="docutils literal notranslate"><span class="pre">~/.config/containers/storage.conf</span></code></p>
+<p>and make the following change using your favorite text editor:</p>
+<p><code class="docutils literal notranslate"><span class="pre">graphroot</span> <span class="pre">=</span> <span class="pre">&quot;/erisxdl/local/storage/abc123&quot;</span></code></p>
+<p>where abc123 corresponds to the userid. By this means podman will operate normally on all 3 login nodes, even in the case of node failure. However, the images available on each node will be different. The images stored in Harbor at</p>
+<p><code class="docutils literal notranslate"><span class="pre">erisxdl.partners.org/&lt;PAS</span> <span class="pre">Group</span> <span class="pre">Name</span> <span class="pre">in</span> <span class="pre">lowercase&gt;</span></code></p>
+<p>will of course always be available. If there is trouble please submit a request to hpcsupport to run</p>
+<p><code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">./podman_reset.sh</span> <span class="pre">&lt;userID&gt;</span> <span class="pre">/erisxdl/local/storage</span></code></p>
+<p>Finally, please note that on each of the login nodes erisxdl[1-3] a user will have a quota of 50GB (as of 2024/01) for the storage of local images. The current consumption of storage under</p>
+<p><code class="docutils literal notranslate"><span class="pre">/erisxdl[1-3]/local/storage/&lt;userID&gt;</span></code></p>
+<p>can be displayed with the following terminal command:</p>
+<p><code class="docutils literal notranslate"><span class="pre">quota</span> <span class="pre">-vs</span></code></p>
 </section>
 </section>
-<section id="submitting-jobs">
-<h3>Submitting Jobs<a class="headerlink" href="#submitting-jobs" title="Link to this heading">#</a></h3>
+</section>
+<section id="submitting-jobs-on-erisxdl">
+<h2>Submitting Jobs on ERISXdl<a class="headerlink" href="#submitting-jobs-on-erisxdl" title="Link to this heading">#</a></h2>
+<section id="the-slurm-workload-manager">
+<h3>The Slurm Workload Manager<a class="headerlink" href="#the-slurm-workload-manager" title="Link to this heading">#</a></h3>
+<p>Slurm is an open-source load management software that is commonly used by HPC facilities. With Slurm, you can specify the resources your job will use and the partition it will use. HPCs typically use a workload manager so that users use an appropriate amount of resources and as a way to equitably distribute these resources amongst users.</p>
+<p><em>Adapted from <a class="reference external" href="https://rc.partners.org/kb/research/computational-resources/erisxdl?article=3719">https://rc.partners.org/kb/research/computational-resources/erisxdl?article=3719</a></em></p>
+<section id="partitions-on-erisxdl">
+<h4>Partitions on ERISXdl<a class="headerlink" href="#partitions-on-erisxdl" title="Link to this heading">#</a></h4>
+<p>ERISXdl has partitions that you submit to based on the length of your job. Here is a quick summary, but the available partitions can be found using <code class="docutils literal notranslate"><span class="pre">sinfo</span></code>.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Partion</p></th>
+<th class="head"><p>GPU Limit</p></th>
+<th class="head"><p>Max Time Limit</p></th>
+<th class="head"><p>Memory Limit</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Basic (Free tier)</p></td>
+<td><p>8 GPU</p></td>
+<td><p>10 min</p></td>
+<td><p>400G</p></td>
+</tr>
+<tr class="row-odd"><td><p>Short</p></td>
+<td><p>8 GPU</p></td>
+<td><p>2 hour</p></td>
+<td><p>400G</p></td>
+</tr>
+<tr class="row-even"><td><p>Medium</p></td>
+<td><p>8 GPU</p></td>
+<td><p>1 day</p></td>
+<td><p>400G</p></td>
+</tr>
+<tr class="row-odd"><td><p>Long</p></td>
+<td><p>8 GPU</p></td>
+<td><p>5 days</p></td>
+<td><p>400G</p></td>
+</tr>
+<tr class="row-even"><td><p>Mammoth</p></td>
+<td><p>8 GPU</p></td>
+<td><p>2 weeks</p></td>
+<td><p>400G</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="slurm-and-slurm-adjacent-commands">
+<h4>Slurm and Slurm-Adjacent Commands<a class="headerlink" href="#slurm-and-slurm-adjacent-commands" title="Link to this heading">#</a></h4>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Action</p></th>
+<th class="head"><p>Command</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Job Name</p></td>
+<td><p>#SBATCH –job-name=My-Job_Name</p></td>
+</tr>
+<tr class="row-odd"><td><p>Wall time hours</p></td>
+<td><p>#SBATCH –time=24:0:0   or -t[days-hh:min:sec]</p></td>
+</tr>
+<tr class="row-even"><td><p>Number of nodes</p></td>
+<td><p>#SBATCH –nodes=1</p></td>
+</tr>
+<tr class="row-odd"><td><p>Number of proc per node</p></td>
+<td><p>#SBATCH –ntasks-per-node=24</p></td>
+</tr>
+<tr class="row-even"><td><p>Number of cores per task</p></td>
+<td><p>#SBATCH –cpus-per-task=24</p></td>
+</tr>
+<tr class="row-odd"><td><p>Number of GPU</p></td>
+<td><p>#SBATCH –gpus=3</p></td>
+</tr>
+<tr class="row-even"><td><p>Send mail at end of the job</p></td>
+<td><p>#SBATCH –mail-type=end</p></td>
+</tr>
+<tr class="row-odd"><td><p>User’s email address</p></td>
+<td><p>#SBATCH –mail-user=userid&#64;mgb.edu</p></td>
+</tr>
+<tr class="row-even"><td><p>Working Directory</p></td>
+<td><p>#SBATCH –workdir=dir-name</p></td>
+</tr>
+<tr class="row-odd"><td><p>Job Restart</p></td>
+<td><p>#SBATCH –requeue</p></td>
+</tr>
+<tr class="row-even"><td><p>Share Nodes</p></td>
+<td><p>#SBATCH –shared</p></td>
+</tr>
+<tr class="row-odd"><td><p>Dedicated nodes</p></td>
+<td><p>#SBATCH –exclusive</p></td>
+</tr>
+<tr class="row-even"><td><p>Memory Size</p></td>
+<td><p>#SBATCH –mem=[mem</p></td>
+</tr>
+<tr class="row-odd"><td><p>Account to Charge</p></td>
+<td><p>#SBATCH –account=[account] (*Not required, unless you are associated with</p></td>
+</tr>
+<tr class="row-even"><td><p>Partition</p></td>
+<td><p>#SBATCH –partition=[name]</p></td>
+</tr>
+<tr class="row-odd"><td><p>Quality of Service</p></td>
+<td><p>#SBATCH –qos=[name] (<em>Not required and should be omitted</em>)</p></td>
+</tr>
+<tr class="row-even"><td><p>Job Arrays</p></td>
+<td><p>#SBATCH –array=[array_spec]</p></td>
+</tr>
+<tr class="row-odd"><td><p>Use specific resource</p></td>
+<td><p>#SBATCH –constraint=”XXX”</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>You can run your job by calling:</p>
+<p><code class="docutils literal notranslate"><span class="pre">sbatch</span> <span class="pre">&lt;script</span> <span class="pre">path&gt;</span></code></p>
+<p>The commands <code class="docutils literal notranslate"><span class="pre">sacct</span></code> or <code class="docutils literal notranslate"><span class="pre">squeue</span></code> can be used to confirm job status.</p>
+<p>You can cancel the job at any time by calling:</p>
+<p><code class="docutils literal notranslate"><span class="pre">scancel</span> <span class="pre">&lt;jobID&gt;</span></code></p>
+<section id="fairshare-and-gpu-charges">
+<h5>Fairshare and GPU Charges<a class="headerlink" href="#fairshare-and-gpu-charges" title="Link to this heading">#</a></h5>
+<p>Jobs are subjec to the FairShare algorithm, which can be viewed using:</p>
+<p><code class="docutils literal notranslate"><span class="pre">sshare</span> <span class="pre">-u</span> <span class="pre">&lt;userID&gt;</span> <span class="pre">-l</span></code></p>
+<p>You can view everyone’s score using:</p>
+<p><code class="docutils literal notranslate"><span class="pre">sshare</span> <span class="pre">-al</span></code></p>
+<p>Remember that it costs money to use the GPU at a rate of $0.01/min per GPU. You can check your personal charges using <code class="docutils literal notranslate"><span class="pre">charges</span> <span class="pre">-u</span></code> and your group charges using <code class="docutils literal notranslate"><span class="pre">charges</span> <span class="pre">-g</span></code>.</p>
+</section>
+</section>
+</section>
+<section id="slurm-examples">
+<h3>Slurm Examples<a class="headerlink" href="#slurm-examples" title="Link to this heading">#</a></h3>
+<p>The sysadmins have helpfully provided us a few ready-made examples. If you are familiar with Slurm, you will still want to look at the submission scripts because there are ERISXdl-specific commands the <em>must</em> be used.</p>
+<section id="using-a-customized-image">
+<h4>Using a Customized Image<a class="headerlink" href="#using-a-customized-image" title="Link to this heading">#</a></h4>
+<p>Copy the first example by calling:</p>
+<p><code class="docutils literal notranslate"><span class="pre">cp</span> <span class="pre">-r</span> <span class="pre">/data/erisxdl/publicERISXdlDemoCases/case1-GPU</span> <span class="pre">$HOME</span></code></p>
+<p>Here are the contents of the job script, <code class="docutils literal notranslate"><span class="pre">jobScriptBasicP.sh</span></code>:</p>
+<p>If you are familiar with Slurm, you might note that there are more than just a few basic commands. In fact, most of this has little to do with your script and you’re really just exporting a bunch of seemingly strange values. You may notice that a script is run at the bottom called <code class="docutils literal notranslate"><span class="pre">kube-slurm-custom-image-job.sh</span></code>. If you look at this script you’ll see that the exported environment variables are being used by this directly. You will just need to change:</p>
+<p><code class="docutils literal notranslate"><span class="pre">KUBE_IMAGE</span></code> to your Harbor image.</p>
+<p><code class="docutils literal notranslate"><span class="pre">KUBE_DATA_VOLUME</span></code> to your briefcase folder, or alternatively just <code class="docutils literal notranslate"><span class="pre">/data/</span></code>.</p>
+<p>and</p>
+<p><code class="docutils literal notranslate"><span class="pre">KUBE_SCRIPT</span></code> to direct to your file. <code class="docutils literal notranslate"><span class="pre">$SLURM_SUBMIT_DIR</span></code> will direct to the directory where you called <code class="docutils literal notranslate"><span class="pre">sbatch</span></code> to submit your job.</p>
+<p>Here are the contets of <code class="docutils literal notranslate"><span class="pre">example-script.sh</span></code>:</p>
+<p>The contents are not as important, but you should modify the line <code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">~/case1-GPU/cudaTestPrograms</span></code> to wherever you stored the example script.</p>
+</section>
 </section>
 </section>
 <section id="important-links">
@@ -569,16 +761,28 @@ Customizing an existing image is an extremely convenient feature. However, other
 </li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#developing-and-running-code-on-erisxdl">Developing and Running Code on ERISXdl</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-containers">Using Containers</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#podman-and-harbor">Podman and Harbor</a><ul class="nav section-nav flex-column">
-<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#pulling-an-existing-image">Pulling an Existing Image</a></li>
-<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#customizing-an-existing-image">Customizing an Existing Image</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-code-on-erisxdl">Running Code on ERISXdl</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#podman-and-harbor">Podman and Harbor</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#pulling-an-existing-image">Pulling an Existing Image</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#customizing-an-existing-image">Customizing an Existing Image</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#podman-settings">Podman Settings</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#submitting-jobs">Submitting Jobs</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#submitting-jobs-on-erisxdl">Submitting Jobs on ERISXdl</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-slurm-workload-manager">The Slurm Workload Manager</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#partitions-on-erisxdl">Partitions on ERISXdl</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#slurm-and-slurm-adjacent-commands">Slurm and Slurm-Adjacent Commands</a><ul class="nav section-nav flex-column">
+<li class="toc-h5 nav-item toc-entry"><a class="reference internal nav-link" href="#fairshare-and-gpu-charges">Fairshare and GPU Charges</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#slurm-examples">Slurm Examples</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#using-a-customized-image">Using a Customized Image</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#important-links">Important Links</a><ul class="nav section-nav flex-column">

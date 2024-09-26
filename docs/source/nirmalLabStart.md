@@ -33,6 +33,8 @@ You *must* be on the network to succesfully connect. If you are off-campus and w
 ## Navigating ERISXdl
 ```{error}
 This portion is incomplete until we acquire a briefcase account. 
+
+Make sure to replace `<PAS Group Name in lowercase>` with the group name after Briefcase storage is required. 
 ```
 
 There are 3 login nodes: `erisxdl1`, `erisxdl2`, and `erisxdl3`. Login nodes are meant for editing code and moving files but are __never__ for running code. Typically these are shared resources so if you try and run a script on a login node, it can mess with other people trying to set up their run. The system administrators will also be very unhappy and this could potentially lead to (as yet undefined) consequences. But if you were to run something on a login node, it would likely be an accident anyways. 

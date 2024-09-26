@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Preliminary Steps for Nirmal Lab Members &#8212; erisDocs 0.1 documentation</title>
+    <title>The Slurm Workload Manager &#8212; erisDocs 0.1 documentation</title>
   
   
   
@@ -40,7 +40,7 @@
     <script src="_static/doctools.js?v=9a2dae69"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'nirmalLabStart';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'slurmJobs';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -201,7 +201,7 @@
       
       
       
-      <li><a href="_sources/nirmalLabStart.md" target="_blank"
+      <li><a href="_sources/slurmJobs.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -285,7 +285,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Preliminary Steps for Nirmal Lab Members</h1>
+    <h1>The Slurm Workload Manager</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -295,10 +295,16 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Preliminary Steps for Nirmal Lab Members</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#system-architecture">System Architecture</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#logging-in">Logging In</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#navigating-erisxdl">Navigating ERISXdl</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">The Slurm Workload Manager</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#partitions-on-erisxdl">Partitions on ERISXdl</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#slurm-and-slurm-adjacent-commands">Slurm and Slurm-Adjacent Commands</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fairshare-and-gpu-charges">Fairshare and GPU Charges</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#slurm-examples">Slurm Examples</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-a-customized-image">Using a Customized Image</a></li>
 </ul>
 </li>
 </ul>
@@ -313,72 +319,147 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="preliminary-steps-for-nirmal-lab-members">
-<h1>Preliminary Steps for Nirmal Lab Members<a class="headerlink" href="#preliminary-steps-for-nirmal-lab-members" title="Link to this heading">#</a></h1>
-<ol class="arabic simple">
-<li><p>First, request an account using this link: <a class="reference external" href="https://rc.partners.org/scic-cluster-account-request">https://rc.partners.org/scic-cluster-account-request</a></p></li>
-<li><p><em>Requesting an account does not give you access to ERISXdl</em>. To remedy this, you need to ask Jay Omobono (IT support) at <a class="reference internal" href="#jomobono&#64;bwh.harvard.edu"><span class="xref myst">jomobono&#64;bwh.harvard.edu</span></a> and CC Dr. Nirmal to request access for this machine. If this fails contact support requesting to be added at <a class="reference internal" href="#hpcsupport&#64;partners.org"><span class="xref myst">hpcsupport&#64;partners.org</span></a>.</p></li>
-<li><p>Verify your access to the group by calling <code class="docutils literal notranslate"><span class="pre">groups</span></code> from the command line.</p></li>
-</ol>
-</section>
-<section id="system-architecture">
-<h1>System Architecture<a class="headerlink" href="#system-architecture" title="Link to this heading">#</a></h1>
-<p><em>Adapted from https://rc.partners.org/kb/computational-resources/erisxdl?article=3650</em></p>
-<p>ERIS Scientific Computing has implemented a new deep learning GPU Cluster, ERISXdl (ERIS Extreme Deep Learning). This system is built with NVIDIA DGX-1, an integrated system that includes high-performance GPU interconnects which deliver industry-leading performance for AI and deep learning. The current system includes 5 nodes each containing 8 X NVIDIA Tesla V100 GPUs with an aggregate of more than 200 thousand CUDA cores, 25600 Tensor cores, 1280 GB of GPU memory, and 35TB of local storage for data processing, to allow the user to more quickly train larger models as part of a wider series of experiments.</p>
-<p>Increased productivity and performance benefits come from the fact that ERISXdl is an integrated and NVIDIA-supported hardware-software system that is tuned for deep learning. This platform is therefore ideal for addressing deeper and more complex neural networks which offer dramatic increases in accuracy but at a cost of longer compute times and increased latency. In general ERISXdl represents a good fit for the requirements of Deep Learning and Neural Network modelling more generally.</p>
-<p>ERISXdl platform provides:</p>
-<ul class="simple">
-<li><p>Efficient, high-bandwidth streaming of training data. Each system comes configured with a single 480 GB boot OS SSD, and four 1.92 TB SAS SSDs (7.6 TB total) configured as a RAID 0 striped volume for high-bandwidth performance.</p></li>
-<li><p>Multi-gpu and multi-system with GPU performance designed for HPC and Deep Learning applications. Multi-system scaling of Deep Learning computational workloads, both inside the system and between systems, to match the significant GPU performance of each system.</p></li>
-<li><p>The system memory capacity is higher than the GPU memory capacity to enable simplified buffer management and balance for deep learning workloads.</p></li>
-<li><p>Kubernetes and Docker containerized environments to easily emulate the entire software workflow and maintain portability and reproducibility.</p></li>
-<li><p>Jupyter notebooks for rapid development, integration with Github and HPC scheduler Slurm to distribute the workload across the system.</p></li>
-<li><p>Access to high-bandwidth, low-latency Briefcase storage (<strong>Authors Note: I’ll explain what this is later</strong>).</p></li>
-</ul>
-<p>The primary use of the ERISXdl for the Nirmal lab will be to run machine learning models with GPU acceleration (the only real feasible way to run these). As of 09/24, GPU compute units will cost $0.01/GPU/min. So no pressure, but it will cost some money for running a job.</p>
-</section>
-<section id="logging-in">
-<h1>Logging In<a class="headerlink" href="#logging-in" title="Link to this heading">#</a></h1>
-<p>Log in via <code class="docutils literal notranslate"><span class="pre">ssh</span></code>:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ssh<span class="w"> </span>&lt;username&gt;@ersisxdl.partners.org
-</pre></div>
-</div>
-<p>You <em>must</em> be on the network to succesfully connect. If you are off-campus and wish to access ERISXdl, access the VPN by following <a class="reference external" href="https://partnershealthcare.service-now.com/isservicehub?id=kb_article_view&amp;amp;sysparm_article=KB0023967&amp;amp;sys_kb_id=79ad94774ff642005fcfdefd0210c747&amp;amp;spa=1">these instructions</a>.</p>
-<section id="navigating-erisxdl">
-<h2>Navigating ERISXdl<a class="headerlink" href="#navigating-erisxdl" title="Link to this heading">#</a></h2>
-<div class="admonition error">
-<p class="admonition-title">Error</p>
-<p>This portion is incomplete until we acquire a briefcase account.</p>
-<p>Make sure to replace <code class="docutils literal notranslate"><span class="pre">&lt;PAS</span> <span class="pre">Group</span> <span class="pre">Name</span> <span class="pre">in</span> <span class="pre">lowercase&gt;</span></code> with the group name after Briefcase storage is required.</p>
-</div>
-<p>There are 3 login nodes: <code class="docutils literal notranslate"><span class="pre">erisxdl1</span></code>, <code class="docutils literal notranslate"><span class="pre">erisxdl2</span></code>, and <code class="docutils literal notranslate"><span class="pre">erisxdl3</span></code>. Login nodes are meant for editing code and moving files but are <strong>never</strong> for running code. Typically these are shared resources so if you try and run a script on a login node, it can mess with other people trying to set up their run. The system administrators will also be very unhappy and this could potentially lead to (as yet undefined) consequences. But if you were to run something on a login node, it would likely be an accident anyways.</p>
+  <section id="the-slurm-workload-manager">
+<h1>The Slurm Workload Manager<a class="headerlink" href="#the-slurm-workload-manager" title="Link to this heading">#</a></h1>
+<p>Slurm is an open-source load management software that is commonly used by HPC facilities. With Slurm, you can specify the resources your job will use and the partition it will use. HPCs typically use a workload manager so that users use an appropriate amount of resources and as a way to equitably distribute these resources amongst users.</p>
+<p><em>Adapted from <a class="reference external" href="https://rc.partners.org/kb/research/computational-resources/erisxdl?article=3719">https://rc.partners.org/kb/research/computational-resources/erisxdl?article=3719</a></em></p>
+<section id="partitions-on-erisxdl">
+<h2>Partitions on ERISXdl<a class="headerlink" href="#partitions-on-erisxdl" title="Link to this heading">#</a></h2>
+<p>ERISXdl has partitions that you submit to based on the length of your job. Here is a quick summary, but the available partitions can be found using <code class="docutils literal notranslate"><span class="pre">sinfo</span></code>.</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
-<tr class="row-odd"><th class="head"><p>File System</p></th>
-<th class="head"><p>Quota</p></th>
-<th class="head"><p>Key Features</p></th>
+<tr class="row-odd"><th class="head"><p>Partion</p></th>
+<th class="head"><p>GPU Limit</p></th>
+<th class="head"><p>Max Time Limit</p></th>
+<th class="head"><p>Memory Limit</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">$HOME</span></code></p></td>
-<td><p>Soft limit of 200 GB and hard limit of 600 GB</p></td>
-<td><p>This is not backed up but is not purged.</p></td>
+<tr class="row-even"><td><p>Basic (Free tier)</p></td>
+<td><p>8 GPU</p></td>
+<td><p>10 min</p></td>
+<td><p>400G</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">$SCRATCH</span></code></p></td>
-<td><p>500 GB</p></td>
-<td><p>Your personal scratch is symlinked in your home directory. You can symlink it yourself with <code class="docutils literal notranslate"><span class="pre">ln</span> <span class="pre">-s</span> <span class="pre">/scratch/${USER:0:1}/$USER</span> <span class="pre">scratch</span></code>. Files are deleted every 20 days.</p></td>
+<tr class="row-odd"><td><p>Short</p></td>
+<td><p>8 GPU</p></td>
+<td><p>2 hour</p></td>
+<td><p>400G</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">/data/briefcase</span></code></p></td>
-<td><p>To be determined</p></td>
-<td><p>This is the briefcase storage which will extend our ability to store data.</p></td>
+<tr class="row-even"><td><p>Medium</p></td>
+<td><p>8 GPU</p></td>
+<td><p>1 day</p></td>
+<td><p>400G</p></td>
+</tr>
+<tr class="row-odd"><td><p>Long</p></td>
+<td><p>8 GPU</p></td>
+<td><p>5 days</p></td>
+<td><p>400G</p></td>
+</tr>
+<tr class="row-even"><td><p>Mammoth</p></td>
+<td><p>8 GPU</p></td>
+<td><p>2 weeks</p></td>
+<td><p>400G</p></td>
 </tr>
 </tbody>
 </table>
 </div>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Remember, files in <code class="docutils literal notranslate"><span class="pre">$SCRATCH</span></code> are deleted every 20 days.</p>
+</section>
+<section id="slurm-and-slurm-adjacent-commands">
+<h2>Slurm and Slurm-Adjacent Commands<a class="headerlink" href="#slurm-and-slurm-adjacent-commands" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Action</p></th>
+<th class="head"><p>Command</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Job Name</p></td>
+<td><p>#SBATCH –job-name=My-Job_Name</p></td>
+</tr>
+<tr class="row-odd"><td><p>Wall time hours</p></td>
+<td><p>#SBATCH –time=24:0:0   or -t[days-hh:min:sec]</p></td>
+</tr>
+<tr class="row-even"><td><p>Number of nodes</p></td>
+<td><p>#SBATCH –nodes=1</p></td>
+</tr>
+<tr class="row-odd"><td><p>Number of proc per node</p></td>
+<td><p>#SBATCH –ntasks-per-node=24</p></td>
+</tr>
+<tr class="row-even"><td><p>Number of cores per task</p></td>
+<td><p>#SBATCH –cpus-per-task=24</p></td>
+</tr>
+<tr class="row-odd"><td><p>Number of GPU</p></td>
+<td><p>#SBATCH –gpus=3</p></td>
+</tr>
+<tr class="row-even"><td><p>Send mail at end of the job</p></td>
+<td><p>#SBATCH –mail-type=end</p></td>
+</tr>
+<tr class="row-odd"><td><p>User’s email address</p></td>
+<td><p>#SBATCH –mail-user=userid&#64;mgb.edu</p></td>
+</tr>
+<tr class="row-even"><td><p>Working Directory</p></td>
+<td><p>#SBATCH –workdir=dir-name</p></td>
+</tr>
+<tr class="row-odd"><td><p>Job Restart</p></td>
+<td><p>#SBATCH –requeue</p></td>
+</tr>
+<tr class="row-even"><td><p>Share Nodes</p></td>
+<td><p>#SBATCH –shared</p></td>
+</tr>
+<tr class="row-odd"><td><p>Dedicated nodes</p></td>
+<td><p>#SBATCH –exclusive</p></td>
+</tr>
+<tr class="row-even"><td><p>Memory Size</p></td>
+<td><p>#SBATCH –mem=[mem</p></td>
+</tr>
+<tr class="row-odd"><td><p>Account to Charge</p></td>
+<td><p>#SBATCH –account=[account] (*Not required, unless you are associated with</p></td>
+</tr>
+<tr class="row-even"><td><p>Partition</p></td>
+<td><p>#SBATCH –partition=[name]</p></td>
+</tr>
+<tr class="row-odd"><td><p>Quality of Service</p></td>
+<td><p>#SBATCH –qos=[name] (<em>Not required and should be omitted</em>)</p></td>
+</tr>
+<tr class="row-even"><td><p>Job Arrays</p></td>
+<td><p>#SBATCH –array=[array_spec]</p></td>
+</tr>
+<tr class="row-odd"><td><p>Use specific resource</p></td>
+<td><p>#SBATCH –constraint=”XXX”</p></td>
+</tr>
+</tbody>
+</table>
 </div>
+<p>You can run your job by calling:</p>
+<p><code class="docutils literal notranslate"><span class="pre">sbatch</span> <span class="pre">&lt;script</span> <span class="pre">path&gt;</span></code></p>
+<p>The commands <code class="docutils literal notranslate"><span class="pre">sacct</span></code> or <code class="docutils literal notranslate"><span class="pre">squeue</span></code> can be used to confirm job status.</p>
+<p>You can cancel the job at any time by calling:</p>
+<p><code class="docutils literal notranslate"><span class="pre">scancel</span> <span class="pre">&lt;jobID&gt;</span></code></p>
+<section id="fairshare-and-gpu-charges">
+<h3>Fairshare and GPU Charges<a class="headerlink" href="#fairshare-and-gpu-charges" title="Link to this heading">#</a></h3>
+<p>Jobs are subjec to the FairShare algorithm, which can be viewed using:</p>
+<p><code class="docutils literal notranslate"><span class="pre">sshare</span> <span class="pre">-u</span> <span class="pre">&lt;userID&gt;</span> <span class="pre">-l</span></code></p>
+<p>You can view everyone’s score using:</p>
+<p><code class="docutils literal notranslate"><span class="pre">sshare</span> <span class="pre">-al</span></code></p>
+<p>Remember that it costs money to use the GPU at a rate of $0.01/min per GPU. You can check your personal charges using <code class="docutils literal notranslate"><span class="pre">charges</span> <span class="pre">-u</span></code> and your group charges using <code class="docutils literal notranslate"><span class="pre">charges</span> <span class="pre">-g</span></code>.</p>
+</section>
+</section>
+</section>
+<section id="slurm-examples">
+<h1>Slurm Examples<a class="headerlink" href="#slurm-examples" title="Link to this heading">#</a></h1>
+<p>The sysadmins have helpfully provided us a few ready-made examples. If you are familiar with Slurm, you will still want to look at the submission scripts because there are ERISXdl-specific commands the <em>must</em> be used.</p>
+<section id="using-a-customized-image">
+<h2>Using a Customized Image<a class="headerlink" href="#using-a-customized-image" title="Link to this heading">#</a></h2>
+<p>Copy the first example by calling:</p>
+<p><code class="docutils literal notranslate"><span class="pre">cp</span> <span class="pre">-r</span> <span class="pre">/data/erisxdl/publicERISXdlDemoCases/case1-GPU</span> <span class="pre">$HOME</span></code></p>
+<p>Here are the contents of the job script, <code class="docutils literal notranslate"><span class="pre">jobScriptBasicP.sh</span></code>:</p>
+<p>If you are familiar with Slurm, you might note that there are more than just a few basic commands. In fact, most of this has little to do with your script and you’re really just exporting a bunch of seemingly strange values. You may notice that a script is run at the bottom called <code class="docutils literal notranslate"><span class="pre">kube-slurm-custom-image-job.sh</span></code>. If you look at this script you’ll see that the exported environment variables are being used by this directly. You will just need to change:</p>
+<p><code class="docutils literal notranslate"><span class="pre">KUBE_IMAGE</span></code> to your Harbor image.</p>
+<p><code class="docutils literal notranslate"><span class="pre">KUBE_DATA_VOLUME</span></code> to your briefcase folder, or alternatively just <code class="docutils literal notranslate"><span class="pre">/data/</span></code>.</p>
+<p>and</p>
+<p><code class="docutils literal notranslate"><span class="pre">KUBE_SCRIPT</span></code> to direct to your file. <code class="docutils literal notranslate"><span class="pre">$SLURM_SUBMIT_DIR</span></code> will direct to the directory where you called <code class="docutils literal notranslate"><span class="pre">sbatch</span></code> to submit your job.</p>
+<p>Here are the contets of <code class="docutils literal notranslate"><span class="pre">example-script.sh</span></code>:</p>
+<p>The contents are not as important, but you should modify the line <code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">~/case1-GPU/cudaTestPrograms</span></code> to wherever you stored the example script.</p>
 </section>
 </section>
 
@@ -409,10 +490,16 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Preliminary Steps for Nirmal Lab Members</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#system-architecture">System Architecture</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#logging-in">Logging In</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#navigating-erisxdl">Navigating ERISXdl</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">The Slurm Workload Manager</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#partitions-on-erisxdl">Partitions on ERISXdl</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#slurm-and-slurm-adjacent-commands">Slurm and Slurm-Adjacent Commands</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fairshare-and-gpu-charges">Fairshare and GPU Charges</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#slurm-examples">Slurm Examples</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#using-a-customized-image">Using a Customized Image</a></li>
 </ul>
 </li>
 </ul>

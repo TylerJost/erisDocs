@@ -42,9 +42,14 @@ Getting Started
 .. include:: nirmalLabStart.md
    :parser: myst_parser.sphinx_
 
-Developing and Running Code on ERISXdl
+Running Code on ERISXdl
 --------------------------------------
-.. include:: development.md
+.. include:: containers.md
+   :parser: myst_parser.sphinx_
+
+Submitting Jobs on ERISXdl
+--------------------------------------
+.. include:: slurmJobs.md
    :parser: myst_parser.sphinx_
 
 Important Links

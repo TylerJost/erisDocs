@@ -1,4 +1,4 @@
-# Using Containers
+<!-- # Using Containers -->
 If you want to run code in a reproducible, easy to share environment, Docker containers and images are excellent vehicles for running this code. Briefly and non-technically, running a Docker container is like running a computationally inexpensive isolated computer inside of your computer. The instructions for making the container come from the image. For more information on Docker containers and images, check out [this article from AWS](https://aws.amazon.com/compare/the-difference-between-docker-images-and-containers/). For a brief primer on making your own Docker images, check out [this article from TACC](https://containers-at-tacc.readthedocs.io/en/latest/containerize-your-code/overview.html). 
 
 
@@ -15,7 +15,7 @@ ERISXdl uses two services called podman and Harbor. Podman is used because it pr
 
 Harbor is a private container registry used by ERISXdl that you can use to push images. Harbor is used because ERISXdl is not connected to the internet but you will still want to access images.
 
-When you submit your job, you will specify the image you want by using a Harbor location. A wrapper script will be run that spins up a container using this image, then subsequently runs your job in that container.  
+When you submit your job, you will specify the image you want by using a Harbor location. A wrapper script will be run that spins up a container using this image, then subsequently runs your job in that container. With podman/docker on the command line, Harbor will be referred to as erisxdl.partners.org. 
 
 *Adapted from [https://rc.partners.org/kb/article/3718](https://rc.partners.org/kb/article/3718)*
 ### Pulling an Existing Image
@@ -32,6 +32,8 @@ Let's practice using podman by grabbing an image, tagging it, then uploading it 
     or use Harbor: 
 
     `podman login erisxdl.partners.org`
+
+    Remember: erisxdl.partners.org == Harbor
 
 2. Search for an image (in this case a lightweight Linux distribution, Alpine Linux):
 
@@ -50,7 +52,9 @@ Let's practice using podman by grabbing an image, tagging it, then uploading it 
 
 4. Tag the image:
 
-    `podman tag d4ff818577bc erisxdl.partners.org/<PAS Group Name in lowercase>/alpine:demo-copy`
+    `podman tag 91ef0af61f39 erisxdl.partners.org/<PAS Group Name in lowercase>/alpine:demo-copy`
+
+    Notice that we are specifying our image using its `IMAGE ID` and specifying Harbor as the registry.
 
 5.  Push the image to Harbor
 
@@ -110,6 +114,7 @@ Here is an example of getting a basic Ubuntu image and adding `curl` to it:
 
 ### Podman Settings
 *This comes directly from partners*
+
 On ERISXdl there are three login nodes, erisxdl1, erisxdl2 and erisxdl3 and where each will contain differing collections of locally-stored images stored under
 
 `/erisxdl[1-3]/local/storage`
@@ -137,5 +142,3 @@ Finally, please note that on each of the login nodes erisxdl[1-3] a user will ha
 can be displayed with the following terminal command:
 
 `quota -vs`
-
-# Submitting Jobs

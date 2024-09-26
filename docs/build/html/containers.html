@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Using Containers &#8212; erisDocs 0.1 documentation</title>
+    <title>Podman and Harbor &#8212; erisDocs 0.1 documentation</title>
   
   
   
@@ -40,7 +40,7 @@
     <script src="_static/doctools.js?v=9a2dae69"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'development';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'containers';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -201,7 +201,7 @@
       
       
       
-      <li><a href="_sources/development.md" target="_blank"
+      <li><a href="_sources/containers.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -285,7 +285,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Using Containers</h1>
+    <h1>Podman and Harbor</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -295,18 +295,10 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Using Containers</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#podman-and-harbor">Podman and Harbor</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pulling-an-existing-image">Pulling an Existing Image</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#customizing-an-existing-image">Customizing an Existing Image</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#podman-settings">Podman Settings</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pulling-an-existing-image">Pulling an Existing Image</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#customizing-an-existing-image">Customizing an Existing Image</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#podman-settings">Podman Settings</a></li>
 </ul>
-</li>
-</ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#submitting-jobs">Submitting Jobs</a></li>
-</ul>
-
             </nav>
         </div>
     </div>
@@ -317,11 +309,10 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="using-containers">
-<h1>Using Containers<a class="headerlink" href="#using-containers" title="Link to this heading">#</a></h1>
+  <!-- # Using Containers -->
 <p>If you want to run code in a reproducible, easy to share environment, Docker containers and images are excellent vehicles for running this code. Briefly and non-technically, running a Docker container is like running a computationally inexpensive isolated computer inside of your computer. The instructions for making the container come from the image. For more information on Docker containers and images, check out <a class="reference external" href="https://aws.amazon.com/compare/the-difference-between-docker-images-and-containers/">this article from AWS</a>. For a brief primer on making your own Docker images, check out <a class="reference external" href="https://containers-at-tacc.readthedocs.io/en/latest/containerize-your-code/overview.html">this article from TACC</a>.</p>
 <section id="podman-and-harbor">
-<h2>Podman and Harbor<a class="headerlink" href="#podman-and-harbor" title="Link to this heading">#</a></h2>
+<h1>Podman and Harbor<a class="headerlink" href="#podman-and-harbor" title="Link to this heading">#</a></h1>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
 <p>A lot of the official documentation is <strong>very</strong> loose with the terms container and image. When you are on ERISXdl, the end point is building an image which will in turn make a container that runs your code. Remember that images are templates for building containers. This might seem pedantic but is important when communicating to other technical people and important for not confusing new users. As a general rule:</p>
@@ -330,10 +321,10 @@ document.write(`
 </div>
 <p>ERISXdl uses two services called podman and Harbor. Podman is used because it provides extra security. For all intents and purposes, its syntax is largely interchangeable with docker’s commands.</p>
 <p>Harbor is a private container registry used by ERISXdl that you can use to push images. Harbor is used because ERISXdl is not connected to the internet but you will still want to access images.</p>
-<p>When you submit your job, you will specify the image you want by using a Harbor location. A wrapper script will be run that spins up a container using this image, then subsequently runs your job in that container.</p>
+<p>When you submit your job, you will specify the image you want by using a Harbor location. A wrapper script will be run that spins up a container using this image, then subsequently runs your job in that container. With podman/docker on the command line, Harbor will be referred to as erisxdl.partners.org.</p>
 <p><em>Adapted from <a class="reference external" href="https://rc.partners.org/kb/article/3718">https://rc.partners.org/kb/article/3718</a></em></p>
 <section id="pulling-an-existing-image">
-<h3>Pulling an Existing Image<a class="headerlink" href="#pulling-an-existing-image" title="Link to this heading">#</a></h3>
+<h2>Pulling an Existing Image<a class="headerlink" href="#pulling-an-existing-image" title="Link to this heading">#</a></h2>
 <p>Docker can be extremely <a class="reference external" href="https://docs.docker.com/engine/security/">insecure and dangerous to run</a>. So exercise caution when pulling a new Docker image, especially if you are on your personal machine and not using podman.</p>
 <p>Let’s practice using podman by grabbing an image, tagging it, then uploading it to Harbor.</p>
 <ol class="arabic">
@@ -342,6 +333,7 @@ document.write(`
 <p><code class="docutils literal notranslate"><span class="pre">podman</span> <span class="pre">login</span> <span class="pre">docker.io</span></code></p>
 <p>or use Harbor:</p>
 <p><code class="docutils literal notranslate"><span class="pre">podman</span> <span class="pre">login</span> <span class="pre">erisxdl.partners.org</span></code></p>
+<p>Remember: erisxdl.partners.org == Harbor</p>
 </li>
 <li><p>Search for an image (in this case a lightweight Linux distribution, Alpine Linux):</p>
 <p><code class="docutils literal notranslate"><span class="pre">podman</span> <span class="pre">search</span> <span class="pre">docker.io/alpine</span></code></p>
@@ -355,7 +347,8 @@ document.write(`
 </div>
 </li>
 <li><p>Tag the image:</p>
-<p><code class="docutils literal notranslate"><span class="pre">podman</span> <span class="pre">tag</span> <span class="pre">d4ff818577bc</span> <span class="pre">erisxdl.partners.org/&lt;PAS</span> <span class="pre">Group</span> <span class="pre">Name</span> <span class="pre">in</span> <span class="pre">lowercase&gt;/alpine:demo-copy</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">podman</span> <span class="pre">tag</span> <span class="pre">91ef0af61f39</span> <span class="pre">erisxdl.partners.org/&lt;PAS</span> <span class="pre">Group</span> <span class="pre">Name</span> <span class="pre">in</span> <span class="pre">lowercase&gt;/alpine:demo-copy</span></code></p>
+<p>Notice that we are specifying our image using its <code class="docutils literal notranslate"><span class="pre">IMAGE</span> <span class="pre">ID</span></code> and specifying Harbor as the registry.</p>
 </li>
 <li><p>Push the image to Harbor</p>
 <p><code class="docutils literal notranslate"><span class="pre">podman</span> <span class="pre">push</span> <span class="pre">erisxdl.partners.org/&lt;PAS</span> <span class="pre">Group</span> <span class="pre">Name</span> <span class="pre">in</span> <span class="pre">lowercase&gt;/alpine:demo-copy</span></code></p>
@@ -364,7 +357,7 @@ document.write(`
 <p>If you wanted to, you could now use this image for running your code through a submitted job.</p>
 </section>
 <section id="customizing-an-existing-image">
-<h3>Customizing an Existing Image<a class="headerlink" href="#customizing-an-existing-image" title="Link to this heading">#</a></h3>
+<h2>Customizing an Existing Image<a class="headerlink" href="#customizing-an-existing-image" title="Link to this heading">#</a></h2>
 <p>If you spin up a container from an image, this gives you root access to the container. This means you could install python, a package manager, etc inside the container. You could then commit these changes to a new image, then upload this to Harbor and use it.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
@@ -410,9 +403,9 @@ Customizing an existing image is an extremely convenient feature. However, other
 </ol>
 </section>
 <section id="podman-settings">
-<h3>Podman Settings<a class="headerlink" href="#podman-settings" title="Link to this heading">#</a></h3>
-<p><em>This comes directly from partners</em>
-On ERISXdl there are three login nodes, erisxdl1, erisxdl2 and erisxdl3 and where each will contain differing collections of locally-stored images stored under</p>
+<h2>Podman Settings<a class="headerlink" href="#podman-settings" title="Link to this heading">#</a></h2>
+<p><em>This comes directly from partners</em></p>
+<p>On ERISXdl there are three login nodes, erisxdl1, erisxdl2 and erisxdl3 and where each will contain differing collections of locally-stored images stored under</p>
 <p><code class="docutils literal notranslate"><span class="pre">/erisxdl[1-3]/local/storage</span></code></p>
 <p>In order to ensure the user has access to the images on a given node please locate the following file in the home directory</p>
 <p><code class="docutils literal notranslate"><span class="pre">~/.config/containers/storage.conf</span></code></p>
@@ -427,10 +420,6 @@ On ERISXdl there are three login nodes, erisxdl1, erisxdl2 and erisxdl3 and wher
 <p>can be displayed with the following terminal command:</p>
 <p><code class="docutils literal notranslate"><span class="pre">quota</span> <span class="pre">-vs</span></code></p>
 </section>
-</section>
-</section>
-<section id="submitting-jobs">
-<h1>Submitting Jobs<a class="headerlink" href="#submitting-jobs" title="Link to this heading">#</a></h1>
 </section>
 
 
@@ -460,18 +449,10 @@ On ERISXdl there are three login nodes, erisxdl1, erisxdl2 and erisxdl3 and wher
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Using Containers</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#podman-and-harbor">Podman and Harbor</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pulling-an-existing-image">Pulling an Existing Image</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#customizing-an-existing-image">Customizing an Existing Image</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#podman-settings">Podman Settings</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pulling-an-existing-image">Pulling an Existing Image</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#customizing-an-existing-image">Customizing an Existing Image</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#podman-settings">Podman Settings</a></li>
 </ul>
-</li>
-</ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#submitting-jobs">Submitting Jobs</a></li>
-</ul>
-
   </nav></div>
 
 </div></div>
