@@ -324,6 +324,7 @@ document.write(`
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#slurm-examples">Slurm Examples</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#using-a-customized-image">Using a Customized Image</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#running-a-jupyterhub-session">Running a JupyterHub Session</a></li>
 </ul>
 </li>
 </ul>
@@ -349,6 +350,7 @@ document.write(`
 <p>This is documentation for getting started with computing at Mass General Brigham. It is based on the
 <a class="reference external" href="https://docs.tacc.utexas.edu/hpc/lonestar6/">Texas Advanced Computing Center</a>
 computing documentation. It is part self-written, part collection of documents from the associated <a class="reference external" href="https://rc.partners.org/kb">knowledge base</a>.</p>
+<p>These documents are meant to guide you on the ERISXdl system from getting an account, to submitting a job, to effectively writing code. ERIS stands for enterprise research infrastructure services, and Xdl stands for extreme deep learning. Eris is also the Greek goddess of strife and discord, but hopefully this compiled documentation will eliminate a bit of discord in your own life.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>This guide is written assuming you are familiar with using a UNIX based command line system. It tries to not assume that
@@ -607,63 +609,63 @@ Customizing an existing image is an extremely convenient feature. However, other
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Action</p></th>
-<th class="head"><p>Command</p></th>
+<th class="head"><p>Tag</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>Job Name</p></td>
-<td><p>#SBATCH –job-name=My-Job_Name</p></td>
+<td><p>–job-name=My-Job_Name</p></td>
 </tr>
 <tr class="row-odd"><td><p>Wall time hours</p></td>
-<td><p>#SBATCH –time=24:0:0   or -t[days-hh:min:sec]</p></td>
+<td><p>–time=24:0:0   or -t[days-hh:min:sec]</p></td>
 </tr>
 <tr class="row-even"><td><p>Number of nodes</p></td>
-<td><p>#SBATCH –nodes=1</p></td>
+<td><p>–nodes=1</p></td>
 </tr>
 <tr class="row-odd"><td><p>Number of proc per node</p></td>
-<td><p>#SBATCH –ntasks-per-node=24</p></td>
+<td><p>–ntasks-per-node=24</p></td>
 </tr>
 <tr class="row-even"><td><p>Number of cores per task</p></td>
-<td><p>#SBATCH –cpus-per-task=24</p></td>
+<td><p>–cpus-per-task=24</p></td>
 </tr>
 <tr class="row-odd"><td><p>Number of GPU</p></td>
-<td><p>#SBATCH –gpus=3</p></td>
+<td><p>–gpus=3</p></td>
 </tr>
 <tr class="row-even"><td><p>Send mail at end of the job</p></td>
-<td><p>#SBATCH –mail-type=end</p></td>
+<td><p>–mail-type=end</p></td>
 </tr>
 <tr class="row-odd"><td><p>User’s email address</p></td>
-<td><p>#SBATCH –mail-user=userid&#64;mgb.edu</p></td>
+<td><p>–mail-user=userid&#64;mgb.edu</p></td>
 </tr>
 <tr class="row-even"><td><p>Working Directory</p></td>
-<td><p>#SBATCH –workdir=dir-name</p></td>
+<td><p>–workdir=dir-name</p></td>
 </tr>
 <tr class="row-odd"><td><p>Job Restart</p></td>
-<td><p>#SBATCH –requeue</p></td>
+<td><p>–requeue</p></td>
 </tr>
 <tr class="row-even"><td><p>Share Nodes</p></td>
-<td><p>#SBATCH –shared</p></td>
+<td><p>–shared</p></td>
 </tr>
 <tr class="row-odd"><td><p>Dedicated nodes</p></td>
-<td><p>#SBATCH –exclusive</p></td>
+<td><p>–exclusive</p></td>
 </tr>
 <tr class="row-even"><td><p>Memory Size</p></td>
-<td><p>#SBATCH –mem=[mem</p></td>
+<td><p>–mem=[mem</p></td>
 </tr>
 <tr class="row-odd"><td><p>Account to Charge</p></td>
-<td><p>#SBATCH –account=[account] (*Not required, unless you are associated with</p></td>
+<td><p>–account=[account] (*Not required, unless you are associated with</p></td>
 </tr>
 <tr class="row-even"><td><p>Partition</p></td>
-<td><p>#SBATCH –partition=[name]</p></td>
+<td><p>–partition=[name]</p></td>
 </tr>
 <tr class="row-odd"><td><p>Quality of Service</p></td>
-<td><p>#SBATCH –qos=[name] (<em>Not required and should be omitted</em>)</p></td>
+<td><p>–qos=[name] (<em>Not required and should be omitted</em>)</p></td>
 </tr>
 <tr class="row-even"><td><p>Job Arrays</p></td>
-<td><p>#SBATCH –array=[array_spec]</p></td>
+<td><p>–array=[array_spec]</p></td>
 </tr>
 <tr class="row-odd"><td><p>Use specific resource</p></td>
-<td><p>#SBATCH –constraint=”XXX”</p></td>
+<td><p>–constraint=”XXX”</p></td>
 </tr>
 </tbody>
 </table>
@@ -693,14 +695,14 @@ Customizing an existing image is an extremely convenient feature. However, other
 <p>Here are the contents of the job script, <code class="docutils literal notranslate"><span class="pre">jobScriptBasicP.sh</span></code>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>#!/bin/bash
 
-#SBATCH --partition=Basic
-#SBATCH --job-name=exampleCase1
-#SBATCH --gpus=1
-#SBATCH --ntasks=1
-#SBATCH --time=00:10:00
-#SBATCH --mem=8G
-#SBATCH --output=log.%j
-#SBATCH --error=logErrors.%j
+--partition=Basic
+--job-name=exampleCase1
+--gpus=1
+--ntasks=1
+--time=00:10:00
+--mem=8G
+--output=log.%j
+--error=logErrors.%j
 
 ## This is a comment
 
@@ -757,7 +759,48 @@ srun  /data/erisxdl/kube-slurm/wrappers/kube-slurm-custom-image-job.sh
 <span class="n">echo</span> <span class="s2">&quot;*** Test program iteration: end***&quot;</span>
 </pre></div>
 </div>
-<p>The contents are not as important, but you should modify the line <code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">~/case1-GPU/cudaTestPrograms</span></code> to wherever you stored the example script.</p>
+<p>The contents of the script are not as important, but you should modify the 5th line <code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">~/case1-GPU/cudaTestPrograms</span></code> to wherever you stored the example script.</p>
+<p>Finally, run the job:</p>
+<p><code class="docutils literal notranslate"><span class="pre">sbatch</span> <span class="pre">jobScriptBasicP.sh</span></code></p>
+</section>
+<section id="running-a-jupyterhub-session">
+<h4>Running a JupyterHub Session<a class="headerlink" href="#running-a-jupyterhub-session" title="Link to this heading">#</a></h4>
+<p>For this example, copy over the second example:
+<code class="docutils literal notranslate"><span class="pre">cp</span> <span class="pre">-r</span> <span class="pre">/data/erisxdl/publicERISXdlDemoCases/case2-JupyterHub-GPU</span> <span class="pre">$HOME</span></code></p>
+<p>The job submission script is different this time under the file <code class="docutils literal notranslate"><span class="pre">jobScriptJupyterHubBasicP.sh</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+
+<span class="c1">#SBATCH --partition=Basic</span>
+<span class="c1">#SBATCH --job-name=jupyterHubDemo</span>
+<span class="c1">#SBATCH --gpus=1</span>
+<span class="c1">#SBATCH --ntasks=1</span>
+<span class="c1">#SBATCH --time=00:10:00</span>
+<span class="c1">#SBATCH --mem=8G</span>
+<span class="c1">#SBATCH --output=log.%j</span>
+<span class="c1">#SBATCH --error=logErrors.%j</span>
+
+<span class="c1"># Base image</span>
+<span class="n">export</span> <span class="n">KUBE_IMAGE</span><span class="o">=</span><span class="n">erisxdl</span><span class="o">.</span><span class="n">partners</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">library</span><span class="o">/</span><span class="n">jupyter</span><span class="o">-</span><span class="n">minimal</span><span class="o">-</span><span class="n">notebook</span><span class="p">:</span><span class="mi">2023</span><span class="o">-</span><span class="mi">03</span><span class="o">-</span><span class="mi">03</span>
+
+<span class="c1"># Briefcase path</span>
+<span class="n">export</span> <span class="n">KUBE_DATA_VOLUME</span><span class="o">=/</span><span class="n">data</span><span class="o">/&lt;</span><span class="n">your</span> <span class="n">group</span><span class="s1">&#39;s briefcase folder&gt;</span>
+
+<span class="c1"># Invoke the Job</span>
+<span class="n">srun</span> <span class="o">/</span><span class="n">data</span><span class="o">/</span><span class="n">erisxdl</span><span class="o">/</span><span class="n">kube</span><span class="o">-</span><span class="n">slurm</span><span class="o">/</span><span class="n">wrappers</span><span class="o">/</span><span class="n">kube</span><span class="o">-</span><span class="n">slurm</span><span class="o">-</span><span class="n">jupyter</span><span class="o">-</span><span class="n">job</span><span class="o">.</span><span class="n">sh</span>
+</pre></div>
+</div>
+<p>Once again we generate environment values for the image and briefcase location. However, our final script is different. If we run the job submission script, we can check the log file and find output similar to:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>########################################################
+Your Jupyter Notebook URL will be: https://erisxdl.partners.org/jupyter/slurm-job-40592?token=980c481b4ce7a73c3ca6843cdb13c296f1450b4e1a4e3430
+########################################################
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You may notice that this is a really great way to get a 10 minute (by using the Basic partition) interactive session. You could quickly run through an initial run of your script to see if runs before using money on it!</p>
+<p>I haven’t played around with this enough yet to know if changing the image has a big effect or not.</p>
+</div>
+<p>There are other examples for running proprietary software or RStudio sessions at <a class="reference external" href="https://rc.partners.org/kb/article/3718">https://rc.partners.org/kb/article/3718</a></p>
 </section>
 </section>
 </section>
@@ -841,6 +884,7 @@ srun  /data/erisxdl/kube-slurm/wrappers/kube-slurm-custom-image-job.sh
 </li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#slurm-examples">Slurm Examples</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#using-a-customized-image">Using a Customized Image</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#running-a-jupyterhub-session">Running a JupyterHub Session</a></li>
 </ul>
 </li>
 </ul>
