@@ -14,26 +14,26 @@ Long  | 	8 GPU |	5 days| 	400G|
 Mammoth |  	8 GPU| 	2 weeks|	400G |
 
 ## Slurm and Slurm-Adjacent Commands
-| Action | Command |
+| Action | Tag |
 | ------ | ------- |
-|Job Name   	| #SBATCH --job-name=My-Job_Name|
-|Wall time hours  	| #SBATCH --time=24:0:0   or -t[days-hh:min:sec]|
-|Number of nodes   	| #SBATCH --nodes=1|
-|Number of proc per node   	| #SBATCH --ntasks-per-node=24|
-|Number of cores per task   	| #SBATCH --cpus-per-task=24|
-|Number of GPU 	| #SBATCH --gpus=3|
-|Send mail at end of the job 	| #SBATCH --mail-type=end|
-|User's email address   	| #SBATCH --mail-user=userid@mgb.edu|
-|Working Directory  	| #SBATCH --workdir=dir-name|
-|Job Restart  	| #SBATCH --requeue|
-|Share Nodes  	| #SBATCH --shared|
-|Dedicated nodes  	| #SBATCH --exclusive|
-|Memory Size    	| #SBATCH --mem=[mem |M|G|T] or --mem-per-cpu|
-|Account to Charge   	| #SBATCH --account=[account] (*Not required, unless you are associated with |several accounts and need to specify one in particular*)
-|Partition 	| #SBATCH --partition=[name]|
-|Quality of Service 	| #SBATCH --qos=[name] (*Not required and should be omitted*)|
-|Job Arrays    	| #SBATCH --array=[array_spec]|
-|Use specific resource  	| #SBATCH --constraint="XXX"|
+|Job Name   	| --job-name=My-Job_Name|
+|Wall time hours  	| --time=24:0:0   or -t[days-hh:min:sec]|
+|Number of nodes   	| --nodes=1|
+|Number of proc per node   	| --ntasks-per-node=24|
+|Number of cores per task   	| --cpus-per-task=24|
+|Number of GPU 	| --gpus=3|
+|Send mail at end of the job 	| --mail-type=end|
+|User's email address   	| --mail-user=userid@mgb.edu|
+|Working Directory  	| --workdir=dir-name|
+|Job Restart  	| --requeue|
+|Share Nodes  	| --shared|
+|Dedicated nodes  	| --exclusive|
+|Memory Size    	| --mem=[mem |M|G|T] or --mem-per-cpu|
+|Account to Charge   	| --account=[account] (*Not required, unless you are associated with |several accounts and need to specify one in particular*)
+|Partition 	| --partition=[name]|
+|Quality of Service 	| --qos=[name] (*Not required and should be omitted*)|
+|Job Arrays    	| --array=[array_spec]|
+|Use specific resource  	| --constraint="XXX"|
 
 You can run your job by calling:
 
@@ -68,14 +68,14 @@ Here are the contents of the job script, `jobScriptBasicP.sh`:
 ```
 #!/bin/bash
 
-#SBATCH --partition=Basic
-#SBATCH --job-name=exampleCase1
-#SBATCH --gpus=1
-#SBATCH --ntasks=1
-#SBATCH --time=00:10:00
-#SBATCH --mem=8G
-#SBATCH --output=log.%j
-#SBATCH --error=logErrors.%j
+--partition=Basic
+--job-name=exampleCase1
+--gpus=1
+--ntasks=1
+--time=00:10:00
+--mem=8G
+--output=log.%j
+--error=logErrors.%j
 
 ## This is a comment
 
@@ -139,4 +139,50 @@ done
 echo "*** Test program iteration: end***"
 ```
 
-The contents are not as important, but you should modify the line `cd ~/case1-GPU/cudaTestPrograms` to wherever you stored the example script. 
+The contents of the script are not as important, but you should modify the 5th line `cd ~/case1-GPU/cudaTestPrograms` to wherever you stored the example script. 
+
+Finally, run the job:
+
+`sbatch jobScriptBasicP.sh`
+
+## Running a JupyterHub Session
+For this example, copy over the second example:
+`cp -r /data/erisxdl/publicERISXdlDemoCases/case2-JupyterHub-GPU $HOME`
+
+The job submission script is different this time under the file `jobScriptJupyterHubBasicP.sh`:
+```
+#!/bin/bash
+
+#SBATCH --partition=Basic
+#SBATCH --job-name=jupyterHubDemo
+#SBATCH --gpus=1
+#SBATCH --ntasks=1
+#SBATCH --time=00:10:00
+#SBATCH --mem=8G
+#SBATCH --output=log.%j
+#SBATCH --error=logErrors.%j
+
+# Base image
+export KUBE_IMAGE=erisxdl.partners.org/library/jupyter-minimal-notebook:2023-03-03
+
+# Briefcase path
+export KUBE_DATA_VOLUME=/data/<your group's briefcase folder>
+
+# Invoke the Job
+srun /data/erisxdl/kube-slurm/wrappers/kube-slurm-jupyter-job.sh
+```
+Once again we generate environment values for the image and briefcase location. However, our final script is different. If we run the job submission script, we can check the log file and find output similar to:
+
+```
+########################################################
+Your Jupyter Notebook URL will be: https://erisxdl.partners.org/jupyter/slurm-job-40592?token=980c481b4ce7a73c3ca6843cdb13c296f1450b4e1a4e3430
+########################################################
+```
+
+```{note}
+You may notice that this is a really great way to get a 10 minute (by using the Basic partition) interactive session. You could quickly run through an initial run of your script to see if runs before using money on it!
+
+I haven't played around with this enough yet to know if changing the image has a big effect or not.
+```
+
+There are other examples for running proprietary software or RStudio sessions at [https://rc.partners.org/kb/article/3718](https://rc.partners.org/kb/article/3718)
