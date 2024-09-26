@@ -691,12 +691,72 @@ Customizing an existing image is an extremely convenient feature. However, other
 <p>Copy the first example by calling:</p>
 <p><code class="docutils literal notranslate"><span class="pre">cp</span> <span class="pre">-r</span> <span class="pre">/data/erisxdl/publicERISXdlDemoCases/case1-GPU</span> <span class="pre">$HOME</span></code></p>
 <p>Here are the contents of the job script, <code class="docutils literal notranslate"><span class="pre">jobScriptBasicP.sh</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>#!/bin/bash
+
+#SBATCH --partition=Basic
+#SBATCH --job-name=exampleCase1
+#SBATCH --gpus=1
+#SBATCH --ntasks=1
+#SBATCH --time=00:10:00
+#SBATCH --mem=8G
+#SBATCH --output=log.%j
+#SBATCH --error=logErrors.%j
+
+## This is a comment
+
+## %j is the id for this job
+
+## Set the docker container image to be used in the job runtime.
+export KUBE_IMAGE=erisxdl.partners.org/library/cuda:latestWtestProgs
+
+## Set the script to be run within the specified container - this MUST be a separate script
+export KUBE_SCRIPT=$SLURM_SUBMIT_DIR/example-script.sh
+
+## Ensure example-script.sh is executable
+chmod a+x  $SLURM_SUBMIT_DIR/example-script.sh
+
+# Define group briefcase (this will provide the GID for the user at runtime)
+export KUBE_DATA_VOLUME=/data/&lt;your group&#39;s briefcase folder&gt;
+
+# Users can also set the following variable to change the timeout in seconds. It’s 600 by default, but might be useful to change for testing.
+export KUBE_INIT_TIMEOUT=300
+
+## Required wrapper script. This must be included at the end of the job submission script.
+## This wrapper script mounts /data, and your /PHShome directory into the container
+##
+srun  /data/erisxdl/kube-slurm/wrappers/kube-slurm-custom-image-job.sh
+</pre></div>
+</div>
 <p>If you are familiar with Slurm, you might note that there are more than just a few basic commands. In fact, most of this has little to do with your script and you’re really just exporting a bunch of seemingly strange values. You may notice that a script is run at the bottom called <code class="docutils literal notranslate"><span class="pre">kube-slurm-custom-image-job.sh</span></code>. If you look at this script you’ll see that the exported environment variables are being used by this directly. You will just need to change:</p>
 <p><code class="docutils literal notranslate"><span class="pre">KUBE_IMAGE</span></code> to your Harbor image.</p>
 <p><code class="docutils literal notranslate"><span class="pre">KUBE_DATA_VOLUME</span></code> to your briefcase folder, or alternatively just <code class="docutils literal notranslate"><span class="pre">/data/</span></code>.</p>
 <p>and</p>
 <p><code class="docutils literal notranslate"><span class="pre">KUBE_SCRIPT</span></code> to direct to your file. <code class="docutils literal notranslate"><span class="pre">$SLURM_SUBMIT_DIR</span></code> will direct to the directory where you called <code class="docutils literal notranslate"><span class="pre">sbatch</span></code> to submit your job.</p>
 <p>Here are the contets of <code class="docutils literal notranslate"><span class="pre">example-script.sh</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+
+<span class="c1"># Full path name to the location of folder &quot;cudaTestPrograms&quot;.</span>
+<span class="c1"># Please modify the path accordingly:</span>
+<span class="n">cd</span> <span class="o">~/</span><span class="n">case1</span><span class="o">-</span><span class="n">GPU</span><span class="o">/</span><span class="n">cudaTestPrograms</span>
+
+
+<span class="n">echo</span> <span class="s2">&quot;*** Test program compilation ***&quot;</span>
+<span class="n">nvcc</span> <span class="n">vector_add_grid</span><span class="o">.</span><span class="n">cu</span> <span class="o">-</span><span class="n">o</span> <span class="n">vector_add_grid</span>
+
+<span class="n">which</span> <span class="n">vector_add_grid</span>
+
+<span class="n">echo</span> <span class="s2">&quot;*** Test program iteration: start***&quot;</span>
+
+<span class="c1"># Loop a number of times</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="p">{</span><span class="mf">1..50</span><span class="p">}</span>
+<span class="n">do</span>
+   <span class="n">echo</span> <span class="s2">&quot;Iteration $i&quot;</span>
+   <span class="o">./</span><span class="n">vector_add_grid</span>
+<span class="n">done</span>
+
+<span class="n">echo</span> <span class="s2">&quot;*** Test program iteration: end***&quot;</span>
+</pre></div>
+</div>
 <p>The contents are not as important, but you should modify the line <code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">~/case1-GPU/cudaTestPrograms</span></code> to wherever you stored the example script.</p>
 </section>
 </section>

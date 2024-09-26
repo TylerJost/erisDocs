@@ -65,7 +65,7 @@ Copy the first example by calling:
 
 Here are the contents of the job script, `jobScriptBasicP.sh`:
 
-```{bash}
+```
 #!/bin/bash
 
 #SBATCH --partition=Basic
@@ -114,7 +114,7 @@ and
 
 Here are the contets of `example-script.sh`:
 
-```{bash}
+```
 #!/bin/bash
 
 # Full path name to the location of folder "cudaTestPrograms".
