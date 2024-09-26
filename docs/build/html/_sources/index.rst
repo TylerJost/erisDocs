@@ -2,11 +2,10 @@ ERISXdl - Nirmal Lab Documentation
 =============================================
 
 This is documentation for getting started with computing at Mass General Brigham. It is based on the
-`Texas Advanced Computing Center <https://docs.tacc.utexas.edu/hpc/lonestar6/>`_ 
-computing documentation. It is part self-written, part collection of documents from the associated `knowledge base <https://rc.partners.org/kb>`_. 
+`Texas Advanced Computing Center <https://docs.tacc.utexas.edu/hpc/lonestar6/>`_ computing documentation (hook 'em horns). It is part self-written, part collection of documents from the associated `knowledge base <https://rc.partners.org/kb>`_. 
 
 These documents are meant to guide you on the ERISXdl system from getting an account, to submitting a job, to effectively writing code. ERIS stands for enterprise research infrastructure services, and Xdl stands for extreme deep learning. Eris is also the Greek goddess of strife and discord, but hopefully this compiled documentation will eliminate a bit of discord in your own life.
-  
+
 .. note::
 
    This guide is written assuming you are familiar with using a UNIX based command line system. It tries to not assume that

@@ -45,7 +45,7 @@ Let's practice using podman by grabbing an image, tagging it, then uploading it 
 
     We can view the image with `podman images` or `podman image ls`. It will look something like this:
     
-    ```
+    ```bash
     REPOSITORY                 TAG      IMAGE ID       CREATED       SIZE
     docker.io/library/alpine   latest   91ef0af61f39   2 weeks ago   8.09 MB
     ```
