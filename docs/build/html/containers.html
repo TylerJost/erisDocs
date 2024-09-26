@@ -369,8 +369,8 @@ Customizing an existing image is an extremely convenient feature. However, other
 <li><p>Pull the container from Harbor:
 <code class="docutils literal notranslate"><span class="pre">podman</span> <span class="pre">pull</span> <span class="pre">docker.io/ubuntu:22.04</span></code></p>
 <p>Again we can view the container with <code class="docutils literal notranslate"><span class="pre">podman</span> <span class="pre">images</span></code></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">REPOSITORY</span>                 <span class="n">TAG</span>     <span class="n">IMAGE</span> <span class="n">ID</span>       <span class="n">CREATED</span>       <span class="n">SIZE</span>
-<span class="n">docker</span><span class="o">.</span><span class="n">io</span><span class="o">/</span><span class="n">library</span><span class="o">/</span><span class="n">ubuntu</span>   <span class="mf">22.04</span>   <span class="mi">97271</span><span class="n">d29cb79</span>   <span class="mi">2</span> <span class="n">weeks</span> <span class="n">ago</span>   <span class="mf">80.4</span> <span class="n">MB</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>REPOSITORY<span class="w">                 </span>TAG<span class="w">     </span>IMAGE<span class="w"> </span>ID<span class="w">       </span>CREATED<span class="w">       </span>SIZE
+docker.io/library/ubuntu<span class="w">   </span><span class="m">22</span>.04<span class="w">   </span>97271d29cb79<span class="w">   </span><span class="m">2</span><span class="w"> </span>weeks<span class="w"> </span>ago<span class="w">   </span><span class="m">80</span>.4<span class="w"> </span>MB
 </pre></div>
 </div>
 <p>Note the image ID.</p>
@@ -379,18 +379,18 @@ Customizing an existing image is an extremely convenient feature. However, other
 <code class="docutils literal notranslate"><span class="pre">podman</span> <span class="pre">run</span> <span class="pre">-it</span> <span class="pre">97271d29cb79</span> <span class="pre">/bin/bash</span></code></p>
 <p>The <code class="docutils literal notranslate"><span class="pre">-it</span></code> flag opens and interactive terminal and is very common.</p>
 <p>Then install curl and verify it’s working:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">root</span><span class="o">@</span><span class="mf">54116e44</span><span class="n">f656</span><span class="p">:</span><span class="o">/</span><span class="c1"># apt-get upgrade</span>
-<span class="n">root</span><span class="o">@</span><span class="mf">54116e44</span><span class="n">f656</span><span class="p">:</span><span class="o">/</span><span class="c1"># apt-get install curl</span>
-<span class="n">root</span><span class="o">@</span><span class="mf">54116e44</span><span class="n">f656</span><span class="p">:</span><span class="o">/</span><span class="c1"># curl cht.sh/docker</span>
-<span class="n">root</span><span class="o">@</span><span class="mf">54116e44</span><span class="n">f656</span><span class="p">:</span><span class="o">/</span><span class="c1"># exit</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>root@54116e44f656:/#<span class="w"> </span>apt-get<span class="w"> </span>upgrade
+root@54116e44f656:/#<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>curl
+root@54116e44f656:/#<span class="w"> </span>curl<span class="w"> </span>cht.sh/docker
+root@54116e44f656:/#<span class="w"> </span><span class="nb">exit</span>
 </pre></div>
 </div>
 <p>Now we have a running container that has both Ubuntu and <code class="docutils literal notranslate"><span class="pre">curl</span></code>.</p>
 </li>
 <li><p>View the running containers:
 <code class="docutils literal notranslate"><span class="pre">podman</span> <span class="pre">ps</span> <span class="pre">-a</span></code></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">CONTAINER</span> <span class="n">ID</span>  <span class="n">IMAGE</span>                           <span class="n">COMMAND</span>    <span class="n">CREATED</span>         <span class="n">STATUS</span>                    <span class="n">PORTS</span>  <span class="n">NAMES</span>
-<span class="mi">1</span><span class="n">af08557edbe</span>  <span class="n">docker</span><span class="o">.</span><span class="n">io</span><span class="o">/</span><span class="n">library</span><span class="o">/</span><span class="n">ubuntu</span><span class="p">:</span><span class="mf">22.04</span>  <span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">bash</span>  <span class="mi">11</span> <span class="n">minutes</span> <span class="n">ago</span>  <span class="n">Exited</span> <span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="mi">6</span> <span class="n">seconds</span> <span class="n">ago</span>         <span class="n">eager_blackburn</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>CONTAINER<span class="w"> </span>ID<span class="w">  </span>IMAGE<span class="w">                           </span>COMMAND<span class="w">    </span>CREATED<span class="w">         </span>STATUS<span class="w">                    </span>PORTS<span class="w">  </span>NAMES
+1af08557edbe<span class="w">  </span>docker.io/library/ubuntu:22.04<span class="w">  </span>/bin/bash<span class="w">  </span><span class="m">11</span><span class="w"> </span>minutes<span class="w"> </span>ago<span class="w">  </span>Exited<span class="w"> </span><span class="o">(</span><span class="m">0</span><span class="o">)</span><span class="w"> </span><span class="m">6</span><span class="w"> </span>seconds<span class="w"> </span>ago<span class="w">         </span>eager_blackburn
 </pre></div>
 </div>
 <p>You might note that containers have both a <code class="docutils literal notranslate"><span class="pre">CONTAINER</span> <span class="pre">ID</span></code> and a <code class="docutils literal notranslate"><span class="pre">NAME</span></code>.</p>

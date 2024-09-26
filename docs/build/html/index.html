@@ -504,8 +504,8 @@ Customizing an existing image is an extremely convenient feature. However, other
 <li><p>Pull the container from Harbor:
 <code class="docutils literal notranslate"><span class="pre">podman</span> <span class="pre">pull</span> <span class="pre">docker.io/ubuntu:22.04</span></code></p>
 <p>Again we can view the container with <code class="docutils literal notranslate"><span class="pre">podman</span> <span class="pre">images</span></code></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">REPOSITORY</span>                 <span class="n">TAG</span>     <span class="n">IMAGE</span> <span class="n">ID</span>       <span class="n">CREATED</span>       <span class="n">SIZE</span>
-<span class="n">docker</span><span class="o">.</span><span class="n">io</span><span class="o">/</span><span class="n">library</span><span class="o">/</span><span class="n">ubuntu</span>   <span class="mf">22.04</span>   <span class="mi">97271</span><span class="n">d29cb79</span>   <span class="mi">2</span> <span class="n">weeks</span> <span class="n">ago</span>   <span class="mf">80.4</span> <span class="n">MB</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>REPOSITORY<span class="w">                 </span>TAG<span class="w">     </span>IMAGE<span class="w"> </span>ID<span class="w">       </span>CREATED<span class="w">       </span>SIZE
+docker.io/library/ubuntu<span class="w">   </span><span class="m">22</span>.04<span class="w">   </span>97271d29cb79<span class="w">   </span><span class="m">2</span><span class="w"> </span>weeks<span class="w"> </span>ago<span class="w">   </span><span class="m">80</span>.4<span class="w"> </span>MB
 </pre></div>
 </div>
 <p>Note the image ID.</p>
@@ -514,18 +514,18 @@ Customizing an existing image is an extremely convenient feature. However, other
 <code class="docutils literal notranslate"><span class="pre">podman</span> <span class="pre">run</span> <span class="pre">-it</span> <span class="pre">97271d29cb79</span> <span class="pre">/bin/bash</span></code></p>
 <p>The <code class="docutils literal notranslate"><span class="pre">-it</span></code> flag opens and interactive terminal and is very common.</p>
 <p>Then install curl and verify it’s working:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">root</span><span class="o">@</span><span class="mf">54116e44</span><span class="n">f656</span><span class="p">:</span><span class="o">/</span><span class="c1"># apt-get upgrade</span>
-<span class="n">root</span><span class="o">@</span><span class="mf">54116e44</span><span class="n">f656</span><span class="p">:</span><span class="o">/</span><span class="c1"># apt-get install curl</span>
-<span class="n">root</span><span class="o">@</span><span class="mf">54116e44</span><span class="n">f656</span><span class="p">:</span><span class="o">/</span><span class="c1"># curl cht.sh/docker</span>
-<span class="n">root</span><span class="o">@</span><span class="mf">54116e44</span><span class="n">f656</span><span class="p">:</span><span class="o">/</span><span class="c1"># exit</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>root@54116e44f656:/#<span class="w"> </span>apt-get<span class="w"> </span>upgrade
+root@54116e44f656:/#<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>curl
+root@54116e44f656:/#<span class="w"> </span>curl<span class="w"> </span>cht.sh/docker
+root@54116e44f656:/#<span class="w"> </span><span class="nb">exit</span>
 </pre></div>
 </div>
 <p>Now we have a running container that has both Ubuntu and <code class="docutils literal notranslate"><span class="pre">curl</span></code>.</p>
 </li>
 <li><p>View the running containers:
 <code class="docutils literal notranslate"><span class="pre">podman</span> <span class="pre">ps</span> <span class="pre">-a</span></code></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">CONTAINER</span> <span class="n">ID</span>  <span class="n">IMAGE</span>                           <span class="n">COMMAND</span>    <span class="n">CREATED</span>         <span class="n">STATUS</span>                    <span class="n">PORTS</span>  <span class="n">NAMES</span>
-<span class="mi">1</span><span class="n">af08557edbe</span>  <span class="n">docker</span><span class="o">.</span><span class="n">io</span><span class="o">/</span><span class="n">library</span><span class="o">/</span><span class="n">ubuntu</span><span class="p">:</span><span class="mf">22.04</span>  <span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">bash</span>  <span class="mi">11</span> <span class="n">minutes</span> <span class="n">ago</span>  <span class="n">Exited</span> <span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="mi">6</span> <span class="n">seconds</span> <span class="n">ago</span>         <span class="n">eager_blackburn</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>CONTAINER<span class="w"> </span>ID<span class="w">  </span>IMAGE<span class="w">                           </span>COMMAND<span class="w">    </span>CREATED<span class="w">         </span>STATUS<span class="w">                    </span>PORTS<span class="w">  </span>NAMES
+1af08557edbe<span class="w">  </span>docker.io/library/ubuntu:22.04<span class="w">  </span>/bin/bash<span class="w">  </span><span class="m">11</span><span class="w"> </span>minutes<span class="w"> </span>ago<span class="w">  </span>Exited<span class="w"> </span><span class="o">(</span><span class="m">0</span><span class="o">)</span><span class="w"> </span><span class="m">6</span><span class="w"> </span>seconds<span class="w"> </span>ago<span class="w">         </span>eager_blackburn
 </pre></div>
 </div>
 <p>You might note that containers have both a <code class="docutils literal notranslate"><span class="pre">CONTAINER</span> <span class="pre">ID</span></code> and a <code class="docutils literal notranslate"><span class="pre">NAME</span></code>.</p>
@@ -672,7 +672,12 @@ Customizing an existing image is an extremely convenient feature. However, other
 </div>
 <p>You can run your job by calling:</p>
 <p><code class="docutils literal notranslate"><span class="pre">sbatch</span> <span class="pre">&lt;script</span> <span class="pre">path&gt;</span></code></p>
-<p>The commands <code class="docutils literal notranslate"><span class="pre">sacct</span></code> or <code class="docutils literal notranslate"><span class="pre">squeue</span></code> can be used to confirm job status.</p>
+<p>The commands <code class="docutils literal notranslate"><span class="pre">sacct</span></code> or <code class="docutils literal notranslate"><span class="pre">squeue</span></code> can be used to confirm job status. With <code class="docutils literal notranslate"><span class="pre">squeue</span></code> you can see the status in the <code class="docutils literal notranslate"><span class="pre">ST</span></code> column where:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">PD</span></code> means pending.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">R</span></code> means running.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CG</span></code> means completing.</p></li>
+</ul>
 <p>You can cancel the job at any time by calling:</p>
 <p><code class="docutils literal notranslate"><span class="pre">scancel</span> <span class="pre">&lt;jobID&gt;</span></code></p>
 <section id="fairshare-and-gpu-charges">
@@ -693,40 +698,40 @@ Customizing an existing image is an extremely convenient feature. However, other
 <p>Copy the first example by calling:</p>
 <p><code class="docutils literal notranslate"><span class="pre">cp</span> <span class="pre">-r</span> <span class="pre">/data/erisxdl/publicERISXdlDemoCases/case1-GPU</span> <span class="pre">$HOME</span></code></p>
 <p>Here are the contents of the job script, <code class="docutils literal notranslate"><span class="pre">jobScriptBasicP.sh</span></code>:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>#!/bin/bash
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
 
---partition=Basic
---job-name=exampleCase1
---gpus=1
---ntasks=1
---time=00:10:00
---mem=8G
---output=log.%j
---error=logErrors.%j
+--partition<span class="o">=</span>Basic
+--job-name<span class="o">=</span>exampleCase1
+--gpus<span class="o">=</span><span class="m">1</span>
+--ntasks<span class="o">=</span><span class="m">1</span>
+--time<span class="o">=</span><span class="m">00</span>:10:00
+--mem<span class="o">=</span>8G
+--output<span class="o">=</span>log.%j
+--error<span class="o">=</span>logErrors.%j
 
-## This is a comment
+<span class="c1">## This is a comment</span>
 
-## %j is the id for this job
+<span class="c1">## %j is the id for this job</span>
 
-## Set the docker container image to be used in the job runtime.
-export KUBE_IMAGE=erisxdl.partners.org/library/cuda:latestWtestProgs
+<span class="c1">## Set the docker container image to be used in the job runtime.</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">KUBE_IMAGE</span><span class="o">=</span>erisxdl.partners.org/library/cuda:latestWtestProgs
 
-## Set the script to be run within the specified container - this MUST be a separate script
-export KUBE_SCRIPT=$SLURM_SUBMIT_DIR/example-script.sh
+<span class="c1">## Set the script to be run within the specified container - this MUST be a separate script</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">KUBE_SCRIPT</span><span class="o">=</span><span class="nv">$SLURM_SUBMIT_DIR</span>/example-script.sh
 
-## Ensure example-script.sh is executable
-chmod a+x  $SLURM_SUBMIT_DIR/example-script.sh
+<span class="c1">## Ensure example-script.sh is executable</span>
+chmod<span class="w"> </span>a+x<span class="w">  </span><span class="nv">$SLURM_SUBMIT_DIR</span>/example-script.sh
 
-# Define group briefcase (this will provide the GID for the user at runtime)
-export KUBE_DATA_VOLUME=/data/&lt;your group&#39;s briefcase folder&gt;
+<span class="c1"># Define group briefcase (this will provide the GID for the user at runtime)</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">KUBE_DATA_VOLUME</span><span class="o">=</span>/data/&lt;your<span class="w"> </span>group<span class="err">&#39;</span>s<span class="w"> </span>briefcase<span class="w"> </span>folder&gt;
 
-# Users can also set the following variable to change the timeout in seconds. It’s 600 by default, but might be useful to change for testing.
-export KUBE_INIT_TIMEOUT=300
+<span class="c1"># Users can also set the following variable to change the timeout in seconds. It’s 600 by default, but might be useful to change for testing.</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">KUBE_INIT_TIMEOUT</span><span class="o">=</span><span class="m">300</span>
 
-## Required wrapper script. This must be included at the end of the job submission script.
-## This wrapper script mounts /data, and your /PHShome directory into the container
-##
-srun  /data/erisxdl/kube-slurm/wrappers/kube-slurm-custom-image-job.sh
+<span class="c1">## Required wrapper script. This must be included at the end of the job submission script.</span>
+<span class="c1">## This wrapper script mounts /data, and your /PHShome directory into the container</span>
+<span class="c1">##</span>
+srun<span class="w">  </span>/data/erisxdl/kube-slurm/wrappers/kube-slurm-custom-image-job.sh
 </pre></div>
 </div>
 <p>If you are familiar with Slurm, you might note that there are more than just a few basic commands. In fact, most of this has little to do with your script and you’re really just exporting a bunch of seemingly strange values. You may notice that a script is run at the bottom called <code class="docutils literal notranslate"><span class="pre">kube-slurm-custom-image-job.sh</span></code>. If you look at this script you’ll see that the exported environment variables are being used by this directly. You will just need to change:</p>
@@ -735,28 +740,28 @@ srun  /data/erisxdl/kube-slurm/wrappers/kube-slurm-custom-image-job.sh
 <p>and</p>
 <p><code class="docutils literal notranslate"><span class="pre">KUBE_SCRIPT</span></code> to direct to your file. <code class="docutils literal notranslate"><span class="pre">$SLURM_SUBMIT_DIR</span></code> will direct to the directory where you called <code class="docutils literal notranslate"><span class="pre">sbatch</span></code> to submit your job.</p>
 <p>Here are the contets of <code class="docutils literal notranslate"><span class="pre">example-script.sh</span></code>:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
 
 <span class="c1"># Full path name to the location of folder &quot;cudaTestPrograms&quot;.</span>
 <span class="c1"># Please modify the path accordingly:</span>
-<span class="n">cd</span> <span class="o">~/</span><span class="n">case1</span><span class="o">-</span><span class="n">GPU</span><span class="o">/</span><span class="n">cudaTestPrograms</span>
+<span class="nb">cd</span><span class="w"> </span>~/case1-GPU/cudaTestPrograms
 
 
-<span class="n">echo</span> <span class="s2">&quot;*** Test program compilation ***&quot;</span>
-<span class="n">nvcc</span> <span class="n">vector_add_grid</span><span class="o">.</span><span class="n">cu</span> <span class="o">-</span><span class="n">o</span> <span class="n">vector_add_grid</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;*** Test program compilation ***&quot;</span>
+nvcc<span class="w"> </span>vector_add_grid.cu<span class="w"> </span>-o<span class="w"> </span>vector_add_grid
 
-<span class="n">which</span> <span class="n">vector_add_grid</span>
+which<span class="w"> </span>vector_add_grid
 
-<span class="n">echo</span> <span class="s2">&quot;*** Test program iteration: start***&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;*** Test program iteration: start***&quot;</span>
 
 <span class="c1"># Loop a number of times</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="p">{</span><span class="mf">1..50</span><span class="p">}</span>
-<span class="n">do</span>
-   <span class="n">echo</span> <span class="s2">&quot;Iteration $i&quot;</span>
-   <span class="o">./</span><span class="n">vector_add_grid</span>
-<span class="n">done</span>
+<span class="k">for</span><span class="w"> </span>i<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="o">{</span><span class="m">1</span>..50<span class="o">}</span>
+<span class="k">do</span>
+<span class="w">   </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Iteration </span><span class="nv">$i</span><span class="s2">&quot;</span>
+<span class="w">   </span>./vector_add_grid
+<span class="k">done</span>
 
-<span class="n">echo</span> <span class="s2">&quot;*** Test program iteration: end***&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;*** Test program iteration: end***&quot;</span>
 </pre></div>
 </div>
 <p>The contents of the script are not as important, but you should modify the 5th line <code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">~/case1-GPU/cudaTestPrograms</span></code> to wherever you stored the example script.</p>
@@ -768,7 +773,7 @@ srun  /data/erisxdl/kube-slurm/wrappers/kube-slurm-custom-image-job.sh
 <p>For this example, copy over the second example:
 <code class="docutils literal notranslate"><span class="pre">cp</span> <span class="pre">-r</span> <span class="pre">/data/erisxdl/publicERISXdlDemoCases/case2-JupyterHub-GPU</span> <span class="pre">$HOME</span></code></p>
 <p>The job submission script is different this time under the file <code class="docutils literal notranslate"><span class="pre">jobScriptJupyterHubBasicP.sh</span></code>:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
 
 <span class="c1">#SBATCH --partition=Basic</span>
 <span class="c1">#SBATCH --job-name=jupyterHubDemo</span>
@@ -780,13 +785,13 @@ srun  /data/erisxdl/kube-slurm/wrappers/kube-slurm-custom-image-job.sh
 <span class="c1">#SBATCH --error=logErrors.%j</span>
 
 <span class="c1"># Base image</span>
-<span class="n">export</span> <span class="n">KUBE_IMAGE</span><span class="o">=</span><span class="n">erisxdl</span><span class="o">.</span><span class="n">partners</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">library</span><span class="o">/</span><span class="n">jupyter</span><span class="o">-</span><span class="n">minimal</span><span class="o">-</span><span class="n">notebook</span><span class="p">:</span><span class="mi">2023</span><span class="o">-</span><span class="mi">03</span><span class="o">-</span><span class="mi">03</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">KUBE_IMAGE</span><span class="o">=</span>erisxdl.partners.org/library/jupyter-minimal-notebook:2023-03-03
 
 <span class="c1"># Briefcase path</span>
-<span class="n">export</span> <span class="n">KUBE_DATA_VOLUME</span><span class="o">=/</span><span class="n">data</span><span class="o">/&lt;</span><span class="n">your</span> <span class="n">group</span><span class="s1">&#39;s briefcase folder&gt;</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">KUBE_DATA_VOLUME</span><span class="o">=</span>/data/&lt;your<span class="w"> </span>group<span class="err">&#39;</span>s<span class="w"> </span>briefcase<span class="w"> </span>folder&gt;
 
 <span class="c1"># Invoke the Job</span>
-<span class="n">srun</span> <span class="o">/</span><span class="n">data</span><span class="o">/</span><span class="n">erisxdl</span><span class="o">/</span><span class="n">kube</span><span class="o">-</span><span class="n">slurm</span><span class="o">/</span><span class="n">wrappers</span><span class="o">/</span><span class="n">kube</span><span class="o">-</span><span class="n">slurm</span><span class="o">-</span><span class="n">jupyter</span><span class="o">-</span><span class="n">job</span><span class="o">.</span><span class="n">sh</span>
+srun<span class="w"> </span>/data/erisxdl/kube-slurm/wrappers/kube-slurm-jupyter-job.sh
 </pre></div>
 </div>
 <p>Once again we generate environment values for the image and briefcase location. However, our final script is different. If we run the job submission script, we can check the log file and find output similar to:</p>
@@ -800,7 +805,7 @@ Your Jupyter Notebook URL will be: https://erisxdl.partners.org/jupyter/slurm-jo
 <p>You may notice that this is a really great way to get a 10 minute (by using the Basic partition) interactive session. You could quickly run through an initial run of your script to see if runs before using money on it!</p>
 <p>I haven’t played around with this enough yet to know if changing the image has a big effect or not.</p>
 </div>
-<p>There are other examples for running proprietary software or RStudio sessions at <a class="reference external" href="https://rc.partners.org/kb/article/3718">https://rc.partners.org/kb/article/3718</a></p>
+<p>There are other examples for running proprietary software or RStudio sessions at <a class="reference external" href="https://rc.partners.org/kb/article/3718">https://rc.partners.org/kb/article/3718</a>.</p>
 </section>
 </section>
 </section>

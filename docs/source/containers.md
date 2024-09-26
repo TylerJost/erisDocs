@@ -45,7 +45,7 @@ Let's practice using podman by grabbing an image, tagging it, then uploading it 
 
     We can view the image with `podman images` or `podman image ls`. It will look something like this:
     
-    ```
+    ```bash
     REPOSITORY                 TAG      IMAGE ID       CREATED       SIZE
     docker.io/library/alpine   latest   91ef0af61f39   2 weeks ago   8.09 MB
     ```
@@ -75,7 +75,7 @@ Here is an example of getting a basic Ubuntu image and adding `curl` to it:
     `podman pull docker.io/ubuntu:22.04`
 
     Again we can view the container with `podman images`
-    ```
+    ```bash
     REPOSITORY                 TAG     IMAGE ID       CREATED       SIZE
     docker.io/library/ubuntu   22.04   97271d29cb79   2 weeks ago   80.4 MB
     ```
@@ -87,7 +87,7 @@ Here is an example of getting a basic Ubuntu image and adding `curl` to it:
     The `-it` flag opens and interactive terminal and is very common.
 
     Then install curl and verify it's working:
-    ```
+    ```bash
     root@54116e44f656:/# apt-get upgrade
     root@54116e44f656:/# apt-get install curl
     root@54116e44f656:/# curl cht.sh/docker
@@ -98,7 +98,7 @@ Here is an example of getting a basic Ubuntu image and adding `curl` to it:
 3. View the running containers:
     `podman ps -a`
 
-    ```
+    ```bash
     CONTAINER ID  IMAGE                           COMMAND    CREATED         STATUS                    PORTS  NAMES
     1af08557edbe  docker.io/library/ubuntu:22.04  /bin/bash  11 minutes ago  Exited (0) 6 seconds ago         eager_blackburn
     ```

@@ -39,7 +39,11 @@ You can run your job by calling:
 
 `sbatch <script path>`
 
-The commands `sacct` or `squeue` can be used to confirm job status.
+The commands `sacct` or `squeue` can be used to confirm job status. With `squeue` you can see the status in the `ST` column where:
+
+- `PD` means pending.
+- `R` means running.
+- `CG` means completing.
 
 You can cancel the job at any time by calling:
 
@@ -65,7 +69,7 @@ Copy the first example by calling:
 
 Here are the contents of the job script, `jobScriptBasicP.sh`:
 
-```
+```bash
 #!/bin/bash
 
 --partition=Basic
@@ -114,7 +118,7 @@ and
 
 Here are the contets of `example-script.sh`:
 
-```
+```bash
 #!/bin/bash
 
 # Full path name to the location of folder "cudaTestPrograms".
@@ -150,7 +154,7 @@ For this example, copy over the second example:
 `cp -r /data/erisxdl/publicERISXdlDemoCases/case2-JupyterHub-GPU $HOME`
 
 The job submission script is different this time under the file `jobScriptJupyterHubBasicP.sh`:
-```
+```bash
 #!/bin/bash
 
 #SBATCH --partition=Basic
@@ -185,4 +189,5 @@ You may notice that this is a really great way to get a 10 minute (by using the 
 I haven't played around with this enough yet to know if changing the image has a big effect or not.
 ```
 
-There are other examples for running proprietary software or RStudio sessions at [https://rc.partners.org/kb/article/3718](https://rc.partners.org/kb/article/3718)
+There are other examples for running proprietary software or RStudio sessions at [https://rc.partners.org/kb/article/3718](https://rc.partners.org/kb/article/3718). 
+
