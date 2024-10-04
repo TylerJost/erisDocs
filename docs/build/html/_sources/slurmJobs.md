@@ -170,12 +170,12 @@ The job submission script is different this time under the file `jobScriptJupyte
 export KUBE_IMAGE=erisxdl.partners.org/library/jupyter-minimal-notebook:2023-03-03
 
 # Briefcase path
-export KUBE_DATA_VOLUME=/data/<your group's briefcase folder>
+export KUBE_DATA_VOLUME=/data
 
 # Invoke the Job
 srun /data/erisxdl/kube-slurm/wrappers/kube-slurm-jupyter-job.sh
 ```
-Once again we generate environment values for the image and briefcase location. However, our final script is different. If we run the job submission script, we can check the log file and find output similar to:
+Once again we generate environment values for the image and briefcase location. However, our final script is different and meant to open. If we run the job submission script, we can check the log file and find output similar to:
 
 ```text
 ########################################################

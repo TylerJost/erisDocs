@@ -549,13 +549,13 @@ which<span class="w"> </span>vector_add_grid
 <span class="nb">export</span><span class="w"> </span><span class="nv">KUBE_IMAGE</span><span class="o">=</span>erisxdl.partners.org/library/jupyter-minimal-notebook:2023-03-03
 
 <span class="c1"># Briefcase path</span>
-<span class="nb">export</span><span class="w"> </span><span class="nv">KUBE_DATA_VOLUME</span><span class="o">=</span>/data/&lt;your<span class="w"> </span>group<span class="err">&#39;</span>s<span class="w"> </span>briefcase<span class="w"> </span>folder&gt;
+<span class="nb">export</span><span class="w"> </span><span class="nv">KUBE_DATA_VOLUME</span><span class="o">=</span>/data
 
 <span class="c1"># Invoke the Job</span>
 srun<span class="w"> </span>/data/erisxdl/kube-slurm/wrappers/kube-slurm-jupyter-job.sh
 </pre></div>
 </div>
-<p>Once again we generate environment values for the image and briefcase location. However, our final script is different. If we run the job submission script, we can check the log file and find output similar to:</p>
+<p>Once again we generate environment values for the image and briefcase location. However, our final script is different and meant to open. If we run the job submission script, we can check the log file and find output similar to:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>########################################################
 Your Jupyter Notebook URL will be: https://erisxdl.partners.org/jupyter/slurm-job-40592?token=980c481b4ce7a73c3ca6843cdb13c296f1450b4e1a4e3430
 ########################################################

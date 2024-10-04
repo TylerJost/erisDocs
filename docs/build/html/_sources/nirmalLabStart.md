@@ -2,7 +2,7 @@
 
 1. First, request an account using this link: [https://rc.partners.org/scic-cluster-account-request](https://rc.partners.org/scic-cluster-account-request)
 2. *Requesting an account does not give you access to ERISXdl*. To remedy this, you need to ask Jay Omobono (IT support) at [jomobono@bwh.harvard.edu](jomobono@bwh.harvard.edu) and CC Dr. Nirmal to request access for this machine. If this fails contact support requesting to be added at [hpcsupport@partners.org](hpcsupport@partners.org). 
-3. Verify your access to the group by calling `groups` from the command line. 
+3. On ERISXdl, verify you have permission by validating that you can access your `scratch` directory by running `cd ~/scratch`. You can also run one of the examples later on. 
 
 # System Architecture
 *Adapted from https://rc.partners.org/kb/computational-resources/erisxdl?article=3650*
@@ -25,7 +25,7 @@ The primary use of the ERISXdl for the Nirmal lab will be to run machine learnin
 # Logging In
 Log in via `ssh`:
 ```{code} bash
-ssh <username>@ersisxdl.partners.org
+ssh <username>@erisxdl.partners.org
 ```
 
 You *must* be on the network to succesfully connect. If you are off-campus and wish to access ERISXdl, access the VPN by following [these instructions](https://partnershealthcare.service-now.com/isservicehub?id=kb_article_view&sysparm_article=KB0023967&sys_kb_id=79ad94774ff642005fcfdefd0210c747&spa=1).

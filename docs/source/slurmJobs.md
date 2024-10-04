@@ -170,7 +170,7 @@ The job submission script is different this time under the file `jobScriptJupyte
 export KUBE_IMAGE=erisxdl.partners.org/library/jupyter-minimal-notebook:2023-03-03
 
 # Briefcase path
-export KUBE_DATA_VOLUME=/data/<your group's briefcase folder>
+export KUBE_DATA_VOLUME=/data
 
 # Invoke the Job
 srun /data/erisxdl/kube-slurm/wrappers/kube-slurm-jupyter-job.sh
