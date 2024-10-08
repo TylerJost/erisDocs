@@ -48,3 +48,7 @@ There are 3 login nodes: `erisxdl1`, `erisxdl2`, and `erisxdl3`. Login nodes are
 ```{warning}
 Remember, files in `$SCRATCH` are deleted every 20 days. 
 ```
+## Remote Access
+To access ERISXdl when not on the BWH network, you will need to download a VPN by following the instructions [here](https://partnershealthcare.service-now.com/isservicehub?id=kb_article_view&sysparm_article=KB0023968&sys_kb_id=75e0a0b74ff642005fcfdefd0210c759&spa=1). Connect to `pvc.partners.org/saml` through the VPN to access ERISXdl.
+
+The VPN is very aggressive so do not expect to casually browse the internet as pages will randomly stall and not load. 
